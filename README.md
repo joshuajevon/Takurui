@@ -3,11 +3,11 @@
 Step to develop code from your computer:
 1. open terminal
 
-2. git clone https://github.com/RnDBNCC/TechnoScape2023-BE.git (in your terminal)
+2. git clone https://github.com/joshuajevon/Takurui.git (in your terminal)
 
 3. don't forget to add env file setup on your project
 
-4. npm run install:env (in your terminal) -> make sure your node version is 14.21.0
+4. npm run install:env (in your terminal) -> make sure your node version > 18
 
 ![image](https://user-images.githubusercontent.com/90315898/212232429-a09cd204-bc03-4f5a-b20f-a4faedf92571.png)
 
