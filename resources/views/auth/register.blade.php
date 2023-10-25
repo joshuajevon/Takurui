@@ -1,6 +1,11 @@
-@extends('layouts.app')
+@extends('template.template')
 
-@section('content')
+@section('head')
+    {{-- css js --}}
+
+@endsection
+
+@section('body')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -92,7 +97,7 @@
 
                         <div class="row mb-3">
                             <label for="gender  " class="col-md-4 col-form-label text-md-end">{{ __('Gender') }}</label>
-                            
+
                             <div class="col-md-6">
                                 <input type="radio" id="male" name="gender" value="male" @if (old('gender') == "male") checked @endif>
                                 <label for="male">Male</label>
