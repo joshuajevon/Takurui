@@ -67,7 +67,7 @@
                         @endguest
 
                         @auth
-                        <a href=""
+                        <a href="{{ route('addToCart', $product->id) }}"
                             class="btn btn-dark rounded text-light fw-semibold p-3">Add To
                             Cart</a>
                         @endauth

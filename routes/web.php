@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,15 @@ Route::get('/',[ProductController::class, 'welcome'])->name('welcome');
 Route::get('/products', [ProductController::class, 'product'])->name('product');
 
 Route::get('/product-{id}', [ProductController::class, 'productById'])->name('productById');
+
+Route::get('/cart', [ShopController::class, 'cart'])->name('cart');
+
+Route::get('/add-to-cart/{id}', [ShopController::class, 'addToCart'])->name('addToCart');
+
+Route::patch('/update-cart/{id}', [ShopController::class, 'updateCartById'])->name('updateCartById');
+
+Route::delete('/delete-cart/{id}', [ShopController::class, 'deleteCartById'])->name('deleteCartById');
+
 
 Auth::routes();
 

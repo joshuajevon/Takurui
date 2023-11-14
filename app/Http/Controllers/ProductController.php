@@ -51,7 +51,7 @@ class ProductController extends Controller
         // ]);
 
         $extension = $request->file('image')->getClientOriginalExtension();
-        $fileName = $request->name.$extension;
+        $fileName = $request->name.'.'.$extension;
         $request->file('image')->storeAs('/public/image', $fileName);
 
         Product::create([

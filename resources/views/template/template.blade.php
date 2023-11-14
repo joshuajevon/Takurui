@@ -25,7 +25,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/products">Product</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart">Cart</a>
+                </li>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
