@@ -2,7 +2,7 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build" ,
+        "build": "vite build",
         "install:env": "composer install && php artisan key:generate && php artisan migrate:fresh --seed && npm i && npm run dev"
     },
     "devDependencies": {

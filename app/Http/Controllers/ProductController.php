@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function welcome(){
-        $products = Product::latest()->take(3)->get();
+        $products = Product::latest()->take(4)->get();
         return view('main.welcome', compact('products'));
     }
 
