@@ -77,7 +77,7 @@ class ShopController extends Controller
     }
 
     public function storeOrder(Request $request){
-        
+
         // $request->validate([
         //     'payment_method' => 'required|in:credit_card,paypal', // Sesuaikan dengan opsi yang Anda miliki
         //     'shipping_address' => 'required|string',
@@ -111,6 +111,6 @@ class ShopController extends Controller
             $cart->delete();
         }
 
-        return redirect('/order')->with('success', 'Order placed successfully.');
+        return redirect('/dashboard')->with('success', 'Order placed successfully.');
     }
 }
