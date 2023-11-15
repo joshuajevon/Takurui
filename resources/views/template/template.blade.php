@@ -18,29 +18,32 @@
 </head>
 <body>
     {{-- NAVBAR --}}
-    <nav class="navbar navbar-expand-lg bg-black py-3 fs-5">
+    <nav class="fixed-top navbar navbar-dark navbar-expand-lg bg-black py-3 fs-5">
         <div class="container">
             <a class="navbar-brand me-5 text-white" href="#">
                 <img src="{{asset('assets/logos/icon-white.png')}}" alt="logo" height="64">
             </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0" type=" button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto pt-3 pt-lg-0">
                     <li class="nav-item d-flex align-items-center me-3">
                         <a class="nav-link text-light fw-medium" aria-current="page" href="/">HOME</a>
                     </li>
                     <li class="nav-item d-flex align-items-center">
                         <a class="nav-link text-light fw-medium" href="/products">SHOP NOW</a>
                     </li>
+                    <li class="nav-item d-flex align-items-center d-block d-lg-none">
+                        <a class="nav-link text-light fw-medium" href="/products">CART</a>
+                    </li>
                 </ul>
 
-                <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item d-flex align-items-center me-3">
-                        <form class="d-flex nav-link position-relative" role="search">
+                <ul class="navbar-nav">
+                    <li class="nav-item d-flex align-items-center me-lg-3">
+                        <form class="d-flex nav-link position-relative w-100 w-lg-auto text-dark" role="search">
                             <input class="form-control ps-5" type="search" placeholder="Search" aria-label="Search">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="position-absolute top-0 bottom-0 my-auto" style="left: 1.5rem;" viewBox="0 0 16 16">
@@ -49,8 +52,8 @@
                         </form>
                     </li>
 
-                    <li class="nav-item d-flex align-items-center me-3">
-                        <a class="nav-link text-light" href="/cart">
+                    <li class="nav-item d-flex align-items-center me-3 d-none d-lg-block">
+                        <a class="nav-link text-light position-relative" href="/cart">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
                             </svg>
@@ -74,7 +77,7 @@
                     </li>
                     @endif --}}
                     @else
-                    <li class="nav-item dropdown d-flex align-items-center">
+                    <li class="nav-item dropdown d-lg-flex align-items-lg-center">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{-- <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                                 <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
@@ -84,7 +87,6 @@
                                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                             </svg>
                         </a>
-
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/dashboard">Dashboard</a>
@@ -104,16 +106,16 @@
 
     @yield('body')
     <footer class="container py-5">
-        <div class="row">
-            <div class="col-6 col-md-4 mb-3 pe-md-5">
-                <h5 class="fw-bold heading-5 mb-4">About Us</h5>
-                <p class="text-muted">
+        <div class="row row-gap-3">
+            <div class="col-12 col-sm-12 col-md-4 mb-3 pe-md-5">
+                <h5 class="fw-bold heading-5 mb-2 mb-sm-3 mb-md-4">About Us</h5>
+                <p class="text-muted m-0">
                     TakuRui is a retail experience created for fans of all things Japanese lifestyle and culture. We carry exclusive officially licensed apparel, accessories, and more.
                 </p>
             </div>
 
-            <div class="col-6 col-md-4 mb-3">
-                <h5 class="fw-bold heading-5 mb-4">Contact Us</h5>
+            <div class="col-12 col-sm-6 col-md-4 mb-3">
+                <h5 class="fw-bold heading-5 mb-2 mb-sm-3 mb-md-4">Contact Us</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
                         <a href="#" class="nav-link p-0 text-muted d-flex align-items-center gap-3">
@@ -135,8 +137,8 @@
                 </ul>
             </div>
 
-            <div class="col-6 col-md-4 mb-3">
-                <h5 class="fw-bold heading-5 mb-4">Social Media</h5>
+            <div class="col-12 col-sm-6 col-md-4 mb-3">
+                <h5 class="fw-bold heading-5 mb-2 mb-sm-3 mb-md-4">Social Media</h5>
                 <div class="d-flex gap-4">
                     <a href="" class="text-muted">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
@@ -165,19 +167,8 @@
             </div>
         </div>
 
-        <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-            <p>Copyright © 2023 TakuRui. All rights reserved.</p>
-            <ul class="list-unstyled d-flex">
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#twitter"></use>
-                        </svg></a></li>
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#instagram"></use>
-                        </svg></a></li>
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#facebook"></use>
-                        </svg></a></li>
-            </ul>
+        <div class="border-top pt-3">
+            <span class="text-muted">Copyright © 2023 TakuRui. All rights reserved.</span>
         </div>
     </footer>
 
