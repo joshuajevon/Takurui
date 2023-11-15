@@ -48,7 +48,7 @@
                             <th scope="col" class="p-2">Id</th>
                             <th scope="col" class="p-2">Product Name</th>
                             <th scope="col" class="p-2">Price</th>
-                            <th scope="col" class="p-2">Quantity</th>
+                            <th scope="col" class="p-2">stock</th>
                             <th scope="col" class="p-2">Category</th>
                             <th scope="col" class="p-2">Action</th>
                           </tr>
@@ -59,7 +59,7 @@
                               <th scope="row" class="p-2">{{$product->id}}</th>
                               <td class="p-2">{{ $product->name }}</td>
                               <td class="p-2">{{ $product->price }}</td>
-                              <td class="p-2">{{ $product->quantity }}</td>
+                              <td class="p-2">{{ $product->stock }}</td>
                               <td class="p-2">{{ $product->category->category_name }}</td>
                               <td class="p-2 d-flex justify-content-center gap-2">
                                   <a href="{{route('edit', $product->id)}}" class="btn btn-success">Edit</a>

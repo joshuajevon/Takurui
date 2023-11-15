@@ -32,6 +32,9 @@ Route::patch('/update-cart/{id}', [ShopController::class, 'updateCartById'])->na
 
 Route::delete('/delete-cart/{id}', [ShopController::class, 'deleteCartById'])->name('deleteCartById');
 
+Route::get('/order', [ShopController::class, 'order'])->name('order');
+
+Route::post('/store-order', [ShopController::class, 'storeOrder'])->name('storeOrder');
 
 Auth::routes();
 

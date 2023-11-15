@@ -51,11 +51,11 @@
               @enderror
 
               <div class="mb-3">
-                  <label for="exampleInputAuthor" class="form-label">quantity</label>
-                  <input value="{{$product->quantity}}" type="number" value="{{old('quantity')}}" class="form-control @error('quantity') is-invalid @enderror" id="exampleInputAuthor" name="quantity">
+                  <label for="exampleInputAuthor" class="form-label">stock</label>
+                  <input value="{{$product->stock}}" type="number" value="{{old('stock')}}" class="form-control @error('stock') is-invalid @enderror" id="exampleInputAuthor" name="stock">
               </div>
 
-              @error('quantity')
+              @error('stock')
                   <div class="alert alert-danger" role="alert">{{$message}}</div>
               @enderror
 

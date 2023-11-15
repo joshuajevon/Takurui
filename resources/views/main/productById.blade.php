@@ -28,7 +28,7 @@
                         </h5>
                         <h3 class="text-currency">@currency ($product->price)</h3>
 
-                        <h4 class="fs-lg-4 fs-5">Stock: {{$product->quantity}}</h4>
+                        <h4 class="fs-lg-4 fs-5">Stock: {{$product->stock}}</h4>
 
                         @guest
                         {{-- Button trigger modal --}}

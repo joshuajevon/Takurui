@@ -102,8 +102,9 @@
                                                     <button type="button" class="btn btn-danger"
                                                         data-bs-dismiss="modal">No</button>
 
-                                                    <a type="button" href="{{url('/payment  ')}}"
+                                                    <a type="button" href="{{url('/order  ')}}"
                                                         class="btn btn-success">Yes</a>
+
                                                 </div>
                                             </div>
                                         </div>

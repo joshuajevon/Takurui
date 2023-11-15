@@ -44,8 +44,8 @@ class ProductFactory extends Factory
             'name' => $product_name,
             'slug' => $slug,
             'description' => $this->faker->text(200),
-            'price' => $this->faker->numberBetween(10000000,50000000),
-            'quantity' => $this->faker->numberBetween(10,50),
+            'price' => $this->faker->numberBetween(1000000,5000000),
+            'stock' => $this->faker->numberBetween(10,50),
             'image' => 'product-1.jpg',
             'category_id' => 1
         ];

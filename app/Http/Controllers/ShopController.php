@@ -7,11 +7,15 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderProduct;
 
 class ShopController extends Controller
 {
+    // cart
     public function cart() {
-        $carts = Cart::all();
+        $user_id = Auth::user()->id;
+        $carts = Cart::where('user_id', $user_id)->get();
 
         $totalPrice = $carts->sum(function ($cart) {
             return $cart->price * $cart->quantity;
@@ -55,5 +59,58 @@ class ShopController extends Controller
     public function deleteCartById($id){
         Cart::destroy($id);
         return redirect('/cart');
+    }
+
+
+
+    // checkout
+
+    public function order(){
+        $user_id = Auth::user()->id;
+        $carts = Cart::where('user_id', '=', $user_id)->get();
+
+        $totalPrice = $carts->sum(function ($cart) {
+            return $cart->price * $cart->quantity;
+        });
+
+        return view('user.order', compact('carts','totalPrice'));
+    }
+
+    public function storeOrder(Request $request){
+        
+        // $request->validate([
+        //     'payment_method' => 'required|in:credit_card,paypal', // Sesuaikan dengan opsi yang Anda miliki
+        //     'shipping_address' => 'required|string',
+        // ]);
+
+        $user_id = Auth::user()->id;
+        $carts = Cart::where('user_id', '=', $user_id)->get();
+
+        $totalPrice = $carts->sum(function ($cart) {
+            return $cart->price * $cart->quantity;
+        });
+
+        $fileName = time() . '-' . $user_id . $request->file('payment_proof')->getClientOriginalName();
+        $request->file('payment_proof')->storeAs('/public/payment_proof', $fileName);
+
+        $order = Order::create([
+            'user_id' => $user_id,
+            'payment_method' => $request->input('payment_method'),
+            'shipping_address' => $request->input('shipping_address'),
+            'total_price' => $totalPrice,
+            'payment_proof' => $fileName
+        ]);
+
+        foreach ($carts as $cart) {
+            OrderProduct::create([
+                'order_id' => $order->id,
+                'product_id' => $cart->product_id,
+                'quantity' => $cart->quantity,
+                'price' => $cart->price
+            ]);
+            $cart->delete();
+        }
+
+        return redirect('/order')->with('success', 'Order placed successfully.');
     }
 }
