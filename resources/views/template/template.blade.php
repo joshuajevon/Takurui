@@ -92,7 +92,8 @@
                             <a class="dropdown-item" href="/dashboard">Dashboard</a>
 
                             <form class="dropdown-item" action="{{ route('logout') }}" method="POST">
-                                <button class="btn text-danger p-0">Logout</button>
+                                @csrf
+                                <button type="submit" class="btn text-danger p-0">Logout</button>
                             </form>
                         </div>
                     </li>
