@@ -8,8 +8,14 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function welcome(){
-        $products = Product::latest()->take(4)->get();
+    public function welcome(Request $request){
+        if($request->input('search')){
+            // $result = $request->input('search');
+            $products = Product::where('name','like','%' .request('search'). '%')->paginate(9);
+            return view('main.product', compact('products'));
+        } else{
+            $products = Product::latest()->take(4)->get();
+        }
         return view('main.welcome', compact('products'));
     }
 
@@ -19,6 +25,7 @@ class ProductController extends Controller
         } else{
             $products = Product::orderBy('created_at', 'desc')->paginate(9);
         }
+        // $result = $request->input('search');
 
         return view('main.product', compact('products'));
     }

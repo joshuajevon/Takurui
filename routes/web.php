@@ -24,17 +24,20 @@ Route::get('/products', [ProductController::class, 'product'])->name('product');
 
 Route::get('/product-{id}', [ProductController::class, 'productById'])->name('productById');
 
-Route::get('/cart', [ShopController::class, 'cart'])->name('cart');
+Route::middleware('auth')->group(function () {
 
-Route::get('/add-to-cart/{id}', [ShopController::class, 'addToCart'])->name('addToCart');
+    Route::get('/cart', [ShopController::class, 'cart'])->name('cart');
 
-Route::patch('/update-cart/{id}', [ShopController::class, 'updateCartById'])->name('updateCartById');
+    Route::get('/add-to-cart/{id}', [ShopController::class, 'addToCart'])->name('addToCart');
 
-Route::delete('/delete-cart/{id}', [ShopController::class, 'deleteCartById'])->name('deleteCartById');
+    Route::patch('/update-cart/{id}', [ShopController::class, 'updateCartById'])->name('updateCartById');
 
-Route::get('/order', [ShopController::class, 'order'])->name('order');
+    Route::delete('/delete-cart/{id}', [ShopController::class, 'deleteCartById'])->name('deleteCartById');
 
-Route::post('/store-order', [ShopController::class, 'storeOrder'])->name('storeOrder');
+    Route::get('/order', [ShopController::class, 'order'])->name('order');
+
+    Route::post('/store-order', [ShopController::class, 'storeOrder'])->name('storeOrder');
+});
 
 Auth::routes();
 
