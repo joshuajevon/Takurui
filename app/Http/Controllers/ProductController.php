@@ -26,14 +26,25 @@ class ProductController extends Controller
         } else{
             $products = Product::orderBy('created_at', 'desc')->paginate(9);
         }
-        // $result = $request->input('search');
+        $result = $request->input('search');
 
-        return view('main.product', compact('products'));
+        return view('main.product', compact('products','result'));
     }
 
     public function productById($id){
         $product = Product::findOrFail($id);
         return view('main.productById', compact('product'));
+    }
+
+    public function filterCat(Request $request, $id){
+        if($request->input('search')){
+            $products = Product::where('name','like','%' .request('search'). '%')->paginate(9);
+        } else{
+            $products = Product::where('category_id',$id)->paginate(9);
+        }
+
+        $result = $request->input('search');
+        return view('main.product',compact('products','result'));
     }
 
      // admin product

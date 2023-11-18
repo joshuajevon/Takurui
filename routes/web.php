@@ -24,6 +24,8 @@ Route::get('/products', [ProductController::class, 'product'])->name('product');
 
 Route::get('/product-{id}', [ProductController::class, 'productById'])->name('productById');
 
+Route::get('/products/{category}', [ProductController::class, 'filterCat'])->name('filterCat');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/cart', [ShopController::class, 'cart'])->name('cart');
