@@ -15,7 +15,11 @@
 
                 <div class="container p-5 bg-light d-flex flex-column gap-4 rounded">
 
-
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
 
                     <table id="cart" class="table table-hover table-condensed">
                         <thead>

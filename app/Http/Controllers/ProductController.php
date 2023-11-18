@@ -15,8 +15,9 @@ class ProductController extends Controller
             return view('main.product', compact('products'));
         } else{
             $products = Product::latest()->take(4)->get();
+            $limitedEdition = Product::where('category_id',1)->take(4)->get();
         }
-        return view('main.welcome', compact('products'));
+        return view('main.welcome', compact('products','limitedEdition'));
     }
 
     public function product(Request $request){

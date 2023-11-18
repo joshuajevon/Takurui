@@ -79,5 +79,12 @@
         <input type="text" name="shipping_address" class="form-control">
 
         <button type="submit" class="btn btn-success">Submit</button>
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
     </form>
+
+
 @endsection
