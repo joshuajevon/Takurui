@@ -44,7 +44,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/myorder', [DashboardController::class, 'myorder'])->name('myorder');
 
+    Route::get('/myorder/{id}', [DashboardController::class, 'myOrderById'])->name('myOrderById');
+
     Route::patch('/update-payment/{id}', [ShopController::class, 'updatePayment'])->name('updatePayment');
+
+
 });
 
 Auth::routes();
