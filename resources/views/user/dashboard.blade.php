@@ -6,6 +6,8 @@
 
 
 @section('body')
+
+<br><br><br><br><br><br>
     <h1>ini dashboard</h1>
 
 
@@ -16,12 +18,21 @@
     @else
         <p>Welcome, User!</p>
 
-        List Order:
         @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
         @endif
     @endif
+
+    <a href="{{route('profile')}}">Profile</a>
+        <br>
+    <a href="{{route('myorder')}}">My Order</a>
+
+    <form class="" action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="btn text-danger p-0">Logout</button>
+    </form>
+
 
 @endsection

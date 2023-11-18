@@ -39,6 +39,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/order', [ShopController::class, 'order'])->name('order');
 
     Route::post('/store-order', [ShopController::class, 'storeOrder'])->name('storeOrder');
+
+    Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
+
+    Route::get('/myorder', [DashboardController::class, 'myorder'])->name('myorder');
+
+    Route::patch('/update-payment/{id}', [ShopController::class, 'updatePayment'])->name('updatePayment');
 });
 
 Auth::routes();

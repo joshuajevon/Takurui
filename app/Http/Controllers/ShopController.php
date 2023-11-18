@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use Illuminate\Support\Facades\Storage;
 
 class ShopController extends Controller
 {
@@ -127,8 +128,24 @@ class ShopController extends Controller
                 Product::where('id', $cart->products->id)->delete();
             }
         }
-
-
         return redirect('/dashboard')->with('success', 'Order placed successfully.');
+    }
+
+    public function updatePayment($id, Request $request){
+        $user_id = Auth::user()->id;
+        $image = $request->file('payment_proof');
+        $order = Order::findOrFail($id);
+
+        if($image){
+            Storage::delete('/public/payment_proof'.$order->payment_proof);
+            $file_name = time() . '-' . $user_id . $request->file('payment_proof')->getClientOriginalName();
+            $image->storeAs('/public/payment_proof', $file_name);
+            $order->update([
+                'payment_proof' => $file_name,
+                'payment_status' => 'paid'
+            ]);
+        }
+
+        return redirect(route('myorder'));
     }
 }
