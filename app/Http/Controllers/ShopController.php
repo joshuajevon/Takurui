@@ -94,10 +94,6 @@ class ShopController extends Controller
 
     public function storeOrder(Request $request){
 
-        // $request->validate([
-        //     'payment_method' => 'required|in:credit_card,paypal', // Sesuaikan dengan opsi yang Anda miliki
-        //     'shipping_address' => 'required|string',
-        // ]);
 
         $user_id = Auth::user()->id;
         $carts = Cart::where('user_id', '=', $user_id)->get();
@@ -106,8 +102,14 @@ class ShopController extends Controller
             return $cart->price * $cart->quantity;
         });
 
+        $request->validate([
+            'payment_method' => 'required',
+            'payment_proof' => 'required|mimes:png,jpg',
+            'shipping_address' => 'required|string',
+        ]);
         $fileName = time() . '-' . $user_id . $request->file('payment_proof')->getClientOriginalName();
         $request->file('payment_proof')->storeAs('/public/payment_proof', $fileName);
+
 
         $order = Order::create([
             'user_id' => $user_id,
