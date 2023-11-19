@@ -82,9 +82,9 @@
                             <a href="{{ route('productById', $product->id) }}" class="text-decoration-none text-black">
                                 <div class="d-flex flex-column gap-2 gap-lg-3 w-100">
                                     <div class="w-100" style="aspect-ratio: 3/4;">
-                                        <img src="{{ asset('assets/temp/sample-2.png')}}" class="object-fit-cover w-100 h-100" alt="{{ $product->name }}">
+                                        {{-- <img src="{{ asset('assets/temp/sample-2.png')}}" class="object-fit-cover w-100 h-100" alt="{{ $product->name }}"> --}}
 
-                                        {{-- <img src="{{ asset('/storage/image/' . $product->image) }}" class="object-fit-cover w-100 h-100" alt="{{ $product->name }}"> --}}
+                                        <img src="{{ asset('/storage/image/' . $product->image) }}" class="object-fit-cover w-100 h-100" alt="{{ $product->name }}">
                                     </div>
 
                                     <div class="d-flex flex-column gap-1 gap-lg-2 w-100">
