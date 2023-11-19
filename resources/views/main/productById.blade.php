@@ -27,6 +27,7 @@
                         <h5 class=""><span class="badge bg-secondary text-light">{{$product->category->CategoryName}}</span>
                         </h5>
                         <h3 class="text-currency">@currency ($product->price)</h3>
+                        <h3 class="text-currency">Category: {{$product->category->category_name}}</h3>
 
 
 
