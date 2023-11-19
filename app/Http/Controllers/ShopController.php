@@ -25,10 +25,15 @@ class ShopController extends Controller
         return view('user.cart', compact('carts', 'totalPrice'));
     }
 
-    public function addToCart($id){
+    public function addToCart(Request $request, $id){
         $user_id = Auth::user()->id;
+        $size = $request->size;
 
-        $existingCartItem = Cart::where('user_id', $user_id)->where('product_id', $id)->first();
+        $existingCartItem = Cart::where('user_id', $user_id)->where('product_id', $id) ->where('size', $size)->first();
+
+        $request->validate([
+            'size' => 'required',
+        ]);
 
         if ($existingCartItem) {
             $existingCartItem->quantity += 1;
@@ -40,7 +45,8 @@ class ShopController extends Controller
                 'user_id' => $user_id,
                 'product_id' => $id,
                 'quantity' => 1,
-                'price' => $price
+                'price' => $price,
+                'size' => $size
             ]);
         }
 
@@ -48,14 +54,18 @@ class ShopController extends Controller
     }
 
     public function updateCartById(Request $request, $id){
-        $cartId = Cart::findOrFail($id);
-        $pid = $cartId->product_id;
-        $stock = Product::where('id', $pid)->pluck('stock')->first();
+        $cartItem = Cart::findOrFail($id);
+        $productId = $cartItem->product_id;
+        $stock = Product::where('id', $productId)->pluck('stock')->first();
+        $totalQuantityInCart = Cart::where('product_id', $productId)->sum('quantity');
 
-        if ($request->quantity > $stock) {
-            return redirect('/cart')->with('error', 'Not enough stock for product');
+        $newTotalQuantity = $totalQuantityInCart - $cartItem->quantity + $request->quantity;
+
+        if ($newTotalQuantity > $stock) {
+            return redirect('/cart')->with('error', 'Not enough stock for the selected size');
         }
-        $cartId->update([
+
+        $cartItem->update([
             'quantity' => $request->quantity,
         ]);
 
@@ -109,10 +119,6 @@ class ShopController extends Controller
 
         foreach ($carts as $cart) {
 
-            if ($cart->quantity > $cart->products->stock) {
-                return redirect('/order')->with('error', 'Not enough stock for product: ' . $cart->product->name);
-            }
-
             $cart->products->stock = $cart->products->stock - $cart->quantity;
             $cart->products->save();
 
@@ -120,13 +126,14 @@ class ShopController extends Controller
                 'order_id' => $order->id,
                 'product_id' => $cart->product_id,
                 'quantity' => $cart->quantity,
-                'price' => $cart->price
+                'price' => $cart->price,
+                'size' => $cart->size
             ]);
             $cart->delete();
 
-            if ($cart->products->stock === 0) {
-                Product::where('id', $cart->products->id)->delete();
-            }
+            // if ($cart->products->stock === 0) {
+            //     Product::where('id', $cart->products->id)->delete();
+            // }
         }
         return redirect('/dashboard')->with('success', 'Order placed successfully.');
     }

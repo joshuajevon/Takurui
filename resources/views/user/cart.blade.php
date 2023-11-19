@@ -27,6 +27,7 @@
                                 <th>Product</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
+                                <th>Size</th>
                                 <th class="text-center">Subtotal</th>
                                 <th>Action</th>
                             </tr>
@@ -57,6 +58,9 @@
                                                 Save
                                             </button>
                                         </form>
+                                    </td>
+                                    <td data-th="Subtotal" class="text-center">
+                                        {{$cart->size}}
                                     </td>
                                     <td data-th="Subtotal" class="text-center">
                                         @currency( $cart->price * $cart->quantity )

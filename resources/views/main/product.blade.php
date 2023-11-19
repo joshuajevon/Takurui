@@ -69,7 +69,7 @@
     {{-- Filter --}}
     <a href="{{route('filterCat', 1)}}">Limited Edition</a>
     <a href="{{route('filterCat',2)}}">Standard</a>
-    
+
 
     <a href="{{route('product')}}">Reset</a>
         {{-- product --}}

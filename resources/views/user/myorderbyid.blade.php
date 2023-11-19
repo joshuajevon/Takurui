@@ -11,7 +11,7 @@
 @foreach ($order->orderProducts as $orderItem)
 <img src="{{ asset('/storage/image/' . $orderItem->product->image) }}" width="100" height="100" class="img-responsive" />
     {{$orderItem->product->name}}
-
+    {{$orderItem->size}} .
     {{$orderItem->quantity}}x
     @currency($orderItem->price)
     <br><br>

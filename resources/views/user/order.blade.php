@@ -29,6 +29,11 @@
                 {{ $cart->quantity }}
             </td>
             <br>
+            <td data-th="Size">
+                Size:
+                {{ $cart->size }}
+            </td>
+            <br>
             <td data-th="Subtotal" class="text-center">
                 Sub Total:
                 @currency( $cart->price * $cart->quantity )

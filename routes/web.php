@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cart', [ShopController::class, 'cart'])->name('cart');
 
-    Route::get('/add-to-cart/{id}', [ShopController::class, 'addToCart'])->name('addToCart');
+    Route::post('/add-to-cart/{id}', [ShopController::class, 'addToCart'])->name('addToCart');
 
     Route::patch('/update-cart/{id}', [ShopController::class, 'updateCartById'])->name('updateCartById');
 

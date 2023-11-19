@@ -28,7 +28,7 @@
                         </h5>
                         <h3 class="text-currency">@currency ($product->price)</h3>
 
-                        <h4 class="fs-lg-4 fs-5">Stock: {{$product->stock}}</h4>
+
 
                         @guest
                         {{-- Button trigger modal --}}
@@ -67,9 +67,29 @@
                         @endguest
 
                         @auth
-                        <a href="{{ route('addToCart', $product->id) }}"
-                            class="btn btn-dark rounded text-light fw-semibold p-3">Add To
-                            Cart</a>
+                        <form action="{{route('addToCart', $product->id)}}" method="POST">
+                            @csrf
+
+                            <select class="form-select" aria-label="Default select example" name="size">
+                                <option selected disabled>Select Size</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                              </select>
+                            @error('size')
+                                <p >
+                                    {{$message}}
+                                </p>
+                            @enderror
+                              <br>
+
+                            <button type="submit" href="{{ route('addToCart', $product->id) }}"
+                                class="btn btn-dark rounded text-light fw-semibold p-3">Add To
+                                Cart</button>
+
+                        </form>
                         @endauth
                     </div>
                 </div>
