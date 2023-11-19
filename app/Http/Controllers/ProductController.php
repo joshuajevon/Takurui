@@ -10,9 +10,9 @@ class ProductController extends Controller
 {
     public function welcome(Request $request){
         if($request->input('search')){
-            // $result = $request->input('search');
-            $products = Product::where('name','like','%' .request('search'). '%')->paginate(9);
-            return view('main.product', compact('products'));
+            $result = $request->input('search');
+            $products = Product::where('name','like','%' .request('search'). '%')->paginate(12);
+            return view('main.product', compact('products','result'));
         } else{
             $products = Product::latest()->take(4)->get();
             $limitedEdition = Product::where('category_id',1)->take(4)->get();
@@ -22,9 +22,9 @@ class ProductController extends Controller
 
     public function product(Request $request){
         if($request->input('search')){
-            $products = Product::where('name','like','%' .request('search'). '%')->paginate(9);
+            $products = Product::where('name','like','%' .request('search'). '%')->paginate(12);
         } else{
-            $products = Product::orderBy('created_at', 'desc')->paginate(9);
+            $products = Product::orderBy('created_at', 'desc')->paginate(12);
         }
         $result = $request->input('search');
 
@@ -38,9 +38,9 @@ class ProductController extends Controller
 
     public function filterCat(Request $request, $id){
         if($request->input('search')){
-            $products = Product::where('name','like','%' .request('search'). '%')->paginate(9);
+            $products = Product::where('name','like','%' .request('search'). '%')->paginate(12);
         } else{
-            $products = Product::where('category_id',$id)->paginate(9);
+            $products = Product::where('category_id',$id)->paginate(12);
         }
 
         $result = $request->input('search');

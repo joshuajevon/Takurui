@@ -6,7 +6,7 @@
 
 
 @section('body')
-
+    <br><br><br><br><br>
     <h1>Overview:</h1>
 
     @foreach ($carts as $cart)
@@ -27,6 +27,11 @@
             <td data-th="Quantity">
                 Quantity:
                 {{ $cart->quantity }}
+            </td>
+            <br>
+            <td data-th="Size">
+                Size:
+                {{ $cart->size }}
             </td>
             <br>
             <td data-th="Subtotal" class="text-center">
@@ -63,10 +68,10 @@
                 <label for="utang">Utang</label>
             </div>
             @error('payment_method')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+                <span role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -74,11 +79,23 @@
             <input class="form-control @error('payment_proof') is-invalid @enderror" type="file" id="formFile"
                 name="payment_proof">
         </div>
+        @error('payment_proof')
+            <span role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+         @enderror
 
         <h2>Shipping Address</h2>
         <input type="text" name="shipping_address" class="form-control">
-
+        @error('shipping_address')
+            <span role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+        
+            <br>
         <button type="submit" class="btn btn-success">Submit</button>
+
         @if(session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
