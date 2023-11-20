@@ -37,17 +37,15 @@
                 <h1 class="text-center display-3 w-100">OUR PRODUCTS</h1>
 
                 @if ($products->count() == 0)
-                <div class="">
-                    <h1>Maaf, hasil pencarian produk dengan kata kunci "{{ $result }}" belum tersedia. <a href="/" class="underline text-blue-500">Klik disini</a> untuk kembali ke
-                        Beranda
-                    </h1>
-                </div>
+                    <div class="">
+                        <h1>Sorry, the search results for the product with the keyword "{{ $result }}" are not available yet. <a href="/products" class="underline text-blue-500">Click Here</a> to refresh</h1>
+                    </div>
                 @else
-                @if ($result)
-                <div class="" role="alert">
-                    <h1>Hasil pencarian produk dengan kata kunci "{{ $result }}"</h1>
-                </div>
-                @endif
+                    @if ($result)
+                        <div class="" role="alert">
+                            <h1>Search results for the product with the keyword: "{{ $result }}"</h1>
+                        </div>
+                    @endif
                 @endif
 
                 @can('isAdmin')

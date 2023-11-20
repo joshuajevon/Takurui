@@ -16,7 +16,8 @@ class ProductController extends Controller
         if($request->input('search')){
             $result = $request->input('search');
             $products = Product::where('name','like','%' .request('search'). '%')->where('stock', '>', 0)->paginate(12);
-            return view('main.product', compact('products','result'));
+            $cart_count = Cart::count();
+            return view('main.product', compact('products','result','cart_count'));
         } else{
             $products = Product::latest()->where('stock', '>', 0)->take(4)->get();
             $limitedEdition = Product::where('category_id', 1)->where('stock', '>', 0)->take(4)->get();
@@ -57,7 +58,7 @@ class ProductController extends Controller
      // admin product
 
      public function adminProductDashboard(){
-        $products = Product::all();
+        $products = Product::paginate(10);
         $cart_count = Cart::count();
         return view('admin.product.dashboard', compact('products','cart_count'));
     }
