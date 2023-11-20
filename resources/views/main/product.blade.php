@@ -76,12 +76,11 @@
 
                     {{-- product --}}
                     <div class="row gy-4 gy-lg-5 g-3 g-lg-4 w-100">
-                        {{-- Show 4 produk terbaru --}}
                         @foreach ($products as $product)
-                        <div class="col-lg-3 col-6">
+                        <div class="product-card col-lg-3 col-6">
                             <a href="{{ route('productById', $product->id) }}" class="text-decoration-none text-black">
                                 <div class="d-flex flex-column gap-2 gap-lg-3 w-100">
-                                    <div class="w-100" style="aspect-ratio: 3/4;">
+                                    <div class="w-100 overflow-hidden" style="aspect-ratio: 3/4;">
                                         {{-- <img src="{{ asset('assets/temp/sample-2.png')}}" class="object-fit-cover w-100 h-100" alt="{{ $product->name }}"> --}}
 
                                         <img src="{{ asset('/storage/image/' . $product->image) }}" class="object-fit-cover w-100 h-100" alt="{{ $product->name }}">
@@ -97,7 +96,7 @@
                         @endforeach
                     </div>
 
-                    {{-- PAGIANTION --}}
+                    {{-- PAGINATION --}}
                     @if ($products->hasPages())
                     <nav class="d-flex justify-items-center justify-content-between w-100">
                         <div class="d-flex justify-content-between flex-fill d-sm-none">
