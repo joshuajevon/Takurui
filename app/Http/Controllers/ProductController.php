@@ -11,20 +11,21 @@ class ProductController extends Controller
     public function welcome(Request $request){
         if($request->input('search')){
             $result = $request->input('search');
-            $products = Product::where('name','like','%' .request('search'). '%')->paginate(12);
+            $products = Product::where('name','like','%' .request('search'). '%')->where('stock', '>', 0)->paginate(12);
             return view('main.product', compact('products','result'));
         } else{
-            $products = Product::latest()->take(4)->get();
-            $limitedEdition = Product::where('category_id',1)->take(4)->get();
+            $products = Product::latest()->where('stock', '>', 0)->take(4)->get();
+
+            $limitedEdition = Product::where('category_id', 1)->where('stock', '>', 0)->take(4)->get();
         }
         return view('main.welcome', compact('products','limitedEdition'));
     }
 
     public function product(Request $request){
         if($request->input('search')){
-            $products = Product::where('name','like','%' .request('search'). '%')->paginate(12);
+            $products = Product::where('name','like','%' .request('search'). '%')->where('stock', '>', 0)->paginate(12);
         } else{
-            $products = Product::orderBy('created_at', 'desc')->paginate(12);
+            $products = Product::orderBy('created_at', 'desc')->where('stock', '>', 0)->paginate(12);
         }
         $result = $request->input('search');
 
@@ -38,9 +39,9 @@ class ProductController extends Controller
 
     public function filterCat(Request $request, $id){
         if($request->input('search')){
-            $products = Product::where('name','like','%' .request('search'). '%')->paginate(12);
+            $products = Product::where('name','like','%' .request('search'). '%')->where('stock', '>', 0)->paginate(12);
         } else{
-            $products = Product::where('category_id',$id)->paginate(12);
+            $products = Product::where('category_id',$id)->where('stock', '>', 0)->paginate(12);
         }
 
         $result = $request->input('search');

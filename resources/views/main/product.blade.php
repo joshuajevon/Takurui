@@ -44,7 +44,7 @@
                 </div>
                 @else
                 @if ($result)
-                <div class="">
+                <div class="" role="alert">
                     <h1>Hasil pencarian produk dengan kata kunci "{{ $result }}"</h1>
                 </div>
                 @endif
