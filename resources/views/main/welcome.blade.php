@@ -111,7 +111,7 @@
             @endforeach
         </div>
 
-        <a href="/products" class="btn btn-dark py-2 py-sm-3 px-4 px-sm-5 text-center text-light mt-4 rounded-0" style="width: fit-content">SHOP ALL</a>
+        <a href="/products" class="btn btn-dark py-2 py-sm-3 px-4 px-sm-5 text-center text-light mt-4 mt-lg-5 rounded-0" style="width: fit-content">SHOP ALL</a>
     </div>
 </div>
 
