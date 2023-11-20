@@ -79,7 +79,7 @@
                         @endguest
 
                         @auth
-                        <form action="{{route('addToCart', $product->id)}}" method="POST">
+                        <form action="{{route('addToCart', $product->id)}}" method="POST" class="">
                             @csrf
 
                             <select class="form-select" aria-label="Default select example" name="size">
@@ -90,13 +90,12 @@
                                 <option value="XL">XL</option>
                                 <option value="XXL">XXL</option>
                             </select>
-                            @error('size')
-                            <p>
-                                {{$message}}
-                            </p>
-                            @enderror
                             <br>
-
+                            @error('size')
+                                <div class="alert alert-danger" role="alert">
+                                    {{$message}}
+                                </div>
+                            @enderror
                             <button type="submit" href="{{ route('addToCart', $product->id) }}" class="btn btn-dark rounded text-light fw-semibold p-3">Add To
                                 Cart</button>
 

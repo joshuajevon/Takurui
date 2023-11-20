@@ -15,21 +15,12 @@
             @csrf
             <div class="mb-3">
               <label for="exampleInputName" class="form-label">Category Name</label>
-              <input type="text" class="form-control @error('CategoryName') is-invalid @enderror" id="exampleInputName" name="CategoryName" value="{{old('CategoryName')}}">
+              <input type="text" class="form-control @error('category_name') is-invalid @enderror" id="exampleInputName" name="category_name" value="{{old('category_name')}}">
             </div>
 
-            @error('CategoryName')
+            @error('category_name')
                 <div class="alert alert-danger" role="alert">{{$message}}</div>
             @enderror
-
-            <div class="mb-3">
-                <label for="exampleInputName" class="form-label">Slug </label>
-                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="exampleInputName" name="slug" value="{{old('slug')}}">
-              </div>
-
-              @error('slug')
-                  <div class="alert alert-danger" role="alert">{{$message}}</div>
-              @enderror
 
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>

@@ -59,8 +59,12 @@
                             </svg>
 
                             <span class="position-absolute badge rounded-pill bg-danger" style="font-size: 0.75rem; top: 4px; right: -4px;">
-                                {{-- IF MORE THAN 9 --}}
-                                9
+                                @if ($cart_count > 9)
+                                    9+
+                                @else
+                                    {{$cart_count}}
+                                @endif
+
                             </span>
                         </a>
                     </li>

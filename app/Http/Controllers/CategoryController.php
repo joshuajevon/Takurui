@@ -2,25 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
     public function createCategory(){
-        return view('admin.product.createCategory');
+        $cart_count = Cart::count();
+        return view('admin.product.createCategory', compact('cart_count'));
     }
 
     public function storeCategory(Request $request){
 
-        // $request->validate([
-        //     'CategoryName' => 'required|unique:categories,CategoryName,except,id',
-        // ]);
+        $request->validate([
+            'category_name' => 'required|unique:categories,category_name,except,id',
+        ]);
 
         Category::create([
             'category_name' => $request->category_name,
-            'slug' => $request->slug,
+            'slug' => Str::slug($request->category_name,'-'),
         ]);
-        return redirect('/');
+        return redirect('/admin/product');
     }
 }

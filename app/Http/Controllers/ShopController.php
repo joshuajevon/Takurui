@@ -21,8 +21,8 @@ class ShopController extends Controller
         $totalPrice = $carts->sum(function ($cart) {
             return $cart->price * $cart->quantity;
         });
-
-        return view('user.cart', compact('carts', 'totalPrice'));
+        $cart_count = Cart::count();
+        return view('user.cart', compact('carts', 'totalPrice','cart_count'));
     }
 
     public function addToCart(Request $request, $id){
@@ -88,12 +88,11 @@ class ShopController extends Controller
         $totalPrice = $carts->sum(function ($cart) {
             return $cart->price * $cart->quantity;
         });
-
-        return view('user.order', compact('carts','totalPrice'));
+        $cart_count = Cart::count();
+        return view('user.order', compact('carts','totalPrice','cart_count'));
     }
 
     public function storeOrder(Request $request){
-
 
         $user_id = Auth::user()->id;
         $carts = Cart::where('user_id', '=', $user_id)->get();
@@ -107,7 +106,7 @@ class ShopController extends Controller
             'payment_proof' => 'required|mimes:png,jpg',
             'shipping_address' => 'required|string',
         ]);
-        $fileName = time() . '-' . $user_id . $request->file('payment_proof')->getClientOriginalName();
+        $fileName = time() . '-' . $user_id . '-' . $request->file('payment_proof')->getClientOriginalName();
         $request->file('payment_proof')->storeAs('/public/payment_proof', $fileName);
 
 
@@ -132,11 +131,8 @@ class ShopController extends Controller
                 'size' => $cart->size
             ]);
             $cart->delete();
-
-            // if ($cart->products->stock === 0) {
-            //     Product::where('id', $cart->products->id)->delete();
-            // }
         }
+
         return redirect('/dashboard')->with('success', 'Order placed successfully.');
     }
 
@@ -146,8 +142,8 @@ class ShopController extends Controller
         $order = Order::findOrFail($id);
 
         if($image){
-            Storage::delete('/public/payment_proof'.$order->payment_proof);
-            $file_name = time() . '-' . $user_id . $request->file('payment_proof')->getClientOriginalName();
+            Storage::delete('/public/payment_proof/'.$order->payment_proof);
+            $file_name = time() . '-' . $user_id . '-' . $request->file('payment_proof')->getClientOriginalName();
             $image->storeAs('/public/payment_proof', $file_name);
             $order->update([
                 'payment_proof' => $file_name,

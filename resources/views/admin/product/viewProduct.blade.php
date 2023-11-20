@@ -20,25 +20,28 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputName" class="form-label">Name</label>
-                    <input disabled value="{{$product->name}}" type="text" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" id="exampleInputName" name="name">
+                    <input disabled value="{{$product->name}}" type="text" class="form-control @error('name') is-invalid @enderror" id="exampleInputName" name="name">
                 </div>
 
                 <div class="mb-3">
-                  <label for="exampleInputName" class="form-label">description</label>
+                    <label for="exampleInputName" class="form-label">Slug</label>
+                    <input disabled value="{{$product->slug}}" type="text" class="form-control @error('slug') is-invalid @enderror" id="exampleInputslug" name="slug">
+                </div>
+
+                <div class="mb-3">
+                  <label for="exampleInputName" class="form-label">Description</label>
                   <textarea disabled class="form-control @error('description') is-invalid @enderror" id="exampleInputName"
-                  name="description" cols="30" rows="10">
-                      {{ $product->description }}
-                  </textarea>
+                  name="description" cols="30" rows="10">{{ $product->description }}</textarea>
                 </div>
 
                 <div class="mb-3">
-                    <label for="exampleInputStock" class="form-label">price</label>
-                    <input disabled value="{{$product->price}}" type="text" value="{{old('price')}}" class="form-control @error('price') is-invalid @enderror" id="exampleInputStock" name="price">
+                    <label for="exampleInputStock" class="form-label">Price</label>
+                    <input disabled value="@currency($product->price)" type="text"  class="form-control @error('price') is-invalid @enderror" id="exampleInputStock" name="price">
                 </div>
 
                 <div class="mb-3">
-                    <label for="exampleInputAuthor" class="form-label">stock</label>
-                    <input disabled value="{{$product->stock}}" type="number" value="{{old('stock')}}" class="form-control @error('stock') is-invalid @enderror" id="exampleInputAuthor" name="stock">
+                    <label for="exampleInputAuthor" class="form-label">Stock</label>
+                    <input disabled value="{{$product->stock}}" type="number"  class="form-control @error('stock') is-invalid @enderror" id="exampleInputAuthor" name="stock">
                 </div>
 
                 <div class="mb-3 d-flex flex-column gap-2">

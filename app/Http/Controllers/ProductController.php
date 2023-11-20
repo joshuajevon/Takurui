@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+
     public function welcome(Request $request){
         if($request->input('search')){
             $result = $request->input('search');
@@ -17,10 +19,10 @@ class ProductController extends Controller
             return view('main.product', compact('products','result'));
         } else{
             $products = Product::latest()->where('stock', '>', 0)->take(4)->get();
-
             $limitedEdition = Product::where('category_id', 1)->where('stock', '>', 0)->take(4)->get();
         }
-        return view('main.welcome', compact('products','limitedEdition'));
+        $cart_count = Cart::count();
+        return view('main.welcome', compact('products','limitedEdition','cart_count'));
     }
 
     public function product(Request $request){
@@ -30,13 +32,14 @@ class ProductController extends Controller
             $products = Product::orderBy('created_at', 'desc')->where('stock', '>', 0)->paginate(12);
         }
         $result = $request->input('search');
-
-        return view('main.product', compact('products','result'));
+        $cart_count = Cart::count();
+        return view('main.product', compact('products','result','cart_count'));
     }
 
     public function productById($id){
         $product = Product::findOrFail($id);
-        return view('main.productById', compact('product'));
+        $cart_count = Cart::count();
+        return view('main.productById', compact('product','cart_count'));
     }
 
     public function filterCat(Request $request, $id){
@@ -47,36 +50,35 @@ class ProductController extends Controller
         }
 
         $result = $request->input('search');
-        return view('main.product',compact('products','result'));
+        $cart_count = Cart::count();
+        return view('main.product',compact('products','result','cart_count'));
     }
 
      // admin product
 
      public function adminProductDashboard(){
         $products = Product::all();
-        return view('admin.product.dashboard', compact('products'));
+        $cart_count = Cart::count();
+        return view('admin.product.dashboard', compact('products','cart_count'));
     }
 
     public function createProduct(){
         $categories = Category::all();
-        return view('admin.product.createProduct', compact('categories'));
+        $cart_count = Cart::count();
+        return view('admin.product.createProduct', compact('categories','cart_count'));
     }
 
     public function storeProduct(Request $request){
 
-        // $request->validate([
-        //     'name' => 'required|unique:products,name,except,id',
-        //     'descripton' => 'required',
-        //     'price' => 'required|integer',
-        //     'quantity' => 'required|integer|min:10',
-        //     // 'image' => 'required'
-        // ]);
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required|integer',
+            'stock' => 'required|integer|min:10',
+            'image' => 'required'
+        ]);
 
-        // $extension = $request->file('image')->getClientOriginalExtension();
-        // $fileName = $request->name.'.'.$extension;
-        // $request->file('image')->storeAs('/public/image', $fileName);
-
-        $fileName = time()  . '-' . $request->name . $request->file('image')->getClientOriginalName();
+        $fileName = time()  . '-' . $request->name . '-' . $request->file('image')->getClientOriginalName();
         $request->file('image')->storeAs('/public/image', $fileName);
 
         Product::create([
@@ -84,7 +86,7 @@ class ProductController extends Controller
             'slug' => Str::slug($request->name,'-'),
             'description' => $request->description,
             'price' => $request->price,
-            'quantity' => $request->quantity,
+            'stock' => $request->stock,
             'image' => $fileName,
             'category_id' => $request->CategoryName,
         ]);
@@ -95,25 +97,26 @@ class ProductController extends Controller
 
     public function edit($id){
         $product = Product::findOrFail($id);
-        return view('admin.product.editProduct', compact('product'));
+        $cart_count = Cart::count();
+        $categories = Category::all();
+        return view('admin.product.editProduct', compact('product','cart_count','categories'));
     }
 
     public function update(Request $request, $id){
 
-        // $request->validate([
-        //     'Name' => 'required',
-        //     'PublicationDate' => 'required',
-        //     'Stock' => 'required|integer|gt:5',
-        //     'Author' => 'required|min:5',
-        //     'Image' => 'required|mimes:png,jpg'
-        // ]);
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required|integer',
+            'stock' => 'required|integer|min:10',
+        ]);
 
         $product = Product::findOrFail($id);
         $image = $request->file('image');
 
         if($image){
-            Storage::delete('/storage/image'. $product->image);
-            $fileName = time()  . '-' . $request->name . $request->file('image')->getClientOriginalName();
+            Storage::delete('/public/image/'. $product->image);
+            $fileName = time()  . '-' . $request->name . '-' . $request->file('image')->getClientOriginalName();
             $image->storeAs('/public/image', $fileName);
             $product->update([
                 'image' => $fileName,
@@ -122,10 +125,10 @@ class ProductController extends Controller
 
         $product->update([
             'name' => $request->name,
-            'slug' => $request->slug,
+            'slug' => Str::slug($request->name,'-'),
             'description' => $request->description,
             'price' => $request->price,
-            'quantity' => $request->quantity,
+            'stock' => $request->stock,
         ]);
         return redirect('/admin/product/');
     }
@@ -137,6 +140,7 @@ class ProductController extends Controller
 
     public function viewProductById($id){
         $product = Product::findOrFail($id);
-        return view('admin.product.viewProduct', compact('product'));
+        $cart_count = Cart::count();
+        return view('admin.product.viewProduct', compact('product','cart_count'));
     }
 }
