@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -63,20 +65,23 @@ class ProductController extends Controller
     public function storeProduct(Request $request){
 
         // $request->validate([
-        //     'Name' => 'required|unique:books,Name,except,id',
-        //     'PublicationDate' => 'required',
-        //     'Stock' => 'required|integer|gt:5',
-        //     'Author' => 'required|min:5',
-        //     'Image' => 'required|mimes:png,jpg'
+        //     'name' => 'required|unique:products,name,except,id',
+        //     'descripton' => 'required',
+        //     'price' => 'required|integer',
+        //     'quantity' => 'required|integer|min:10',
+        //     // 'image' => 'required'
         // ]);
 
-        $extension = $request->file('image')->getClientOriginalExtension();
-        $fileName = $request->name.'.'.$extension;
+        // $extension = $request->file('image')->getClientOriginalExtension();
+        // $fileName = $request->name.'.'.$extension;
+        // $request->file('image')->storeAs('/public/image', $fileName);
+
+        $fileName = time()  . '-' . $request->name . $request->file('image')->getClientOriginalName();
         $request->file('image')->storeAs('/public/image', $fileName);
 
         Product::create([
             'name' => $request->name,
-            'slug' => $request->slug,
+            'slug' => Str::slug($request->name,'-'),
             'description' => $request->description,
             'price' => $request->price,
             'quantity' => $request->quantity,
@@ -103,17 +108,24 @@ class ProductController extends Controller
         //     'Image' => 'required|mimes:png,jpg'
         // ]);
 
-        $extension = $request->file('image')->getClientOriginalExtension();
-        $fileName = $request->name.$extension;
-        $request->file('image')->storeAs('/public/image', $fileName);
+        $product = Product::findOrFail($id);
+        $image = $request->file('image');
 
-        Product::findOrFail($id)->update([
+        if($image){
+            Storage::delete('/storage/image'. $product->image);
+            $fileName = time()  . '-' . $request->name . $request->file('image')->getClientOriginalName();
+            $image->storeAs('/public/image', $fileName);
+            $product->update([
+                'image' => $fileName,
+            ]);
+        }
+
+        $product->update([
             'name' => $request->name,
             'slug' => $request->slug,
             'description' => $request->description,
             'price' => $request->price,
             'quantity' => $request->quantity,
-            'image' => $fileName,
         ]);
         return redirect('/admin/product/');
     }
@@ -121,5 +133,10 @@ class ProductController extends Controller
     public function delete($id){
         Product::destroy($id);
         return redirect('/admin/product/');
+    }
+
+    public function viewProductById($id){
+        $product = Product::findOrFail($id);
+        return view('admin.product.viewProduct', compact('product'));
     }
 }

@@ -68,6 +68,7 @@ Route::middleware('isAdmin')->group(function(){
             Route::delete('/delete-product/{id}', [ProductController::class, 'delete'])->name('delete');
             Route::get('/create-category', [CategoryController::class, 'createCategory'])->name('createCategory');
             Route::post('/store-category', [CategoryController::class, 'storeCategory'])->name('storeCategory');
+            Route::get('/view-product/{id}', [ProductController::class, 'viewProductById'])->name('viewProductById');
             // Route::get('/list-dashboard', [ShopController::class, 'listDashboard'])->name('listDashboard');
 
             // Route::get('/{status}', [ShopController::class, 'filterPayments']);

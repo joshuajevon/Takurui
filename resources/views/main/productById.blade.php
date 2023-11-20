@@ -32,6 +32,15 @@
 
 
                         @guest
+                        <select class="form-select" aria-label="Default select example" name="size">
+                            <option selected disabled>Select Size</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                          </select>
+                          
                         {{-- Button trigger modal --}}
                         <a href="{{ route('register') }}" data-bs-toggle="modal" data-bs-target="#exampleModal"
                             class="btn btn-dark text-light fw-semibold p-3">

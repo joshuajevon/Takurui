@@ -47,9 +47,6 @@
                           <tr>
                             <th scope="col" class="p-2">Id</th>
                             <th scope="col" class="p-2">Product Name</th>
-                            <th scope="col" class="p-2">Price</th>
-                            <th scope="col" class="p-2">stock</th>
-                            <th scope="col" class="p-2">Category</th>
                             <th scope="col" class="p-2">Action</th>
                           </tr>
                         </thead>
@@ -58,16 +55,42 @@
                             <tr>
                               <th scope="row" class="p-2">{{$product->id}}</th>
                               <td class="p-2">{{ $product->name }}</td>
-                              <td class="p-2">{{ $product->price }}</td>
-                              <td class="p-2">{{ $product->stock }}</td>
-                              <td class="p-2">{{ $product->category->category_name }}</td>
                               <td class="p-2 d-flex justify-content-center gap-2">
+                                 <a href="{{ route('viewProductById', $product->id) }}" class="btn btn-primary">View</a>
                                   <a href="{{route('edit', $product->id)}}" class="btn btn-success">Edit</a>
                                   <form action="{{route('delete', $product->id)}}" method="POST" class="d-inline">
-                                      @csrf
-                                      @method('delete')
-                                      <button class="btn btn-danger">Delete</button>
-                                  </form>
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                                  <!-- Button trigger modal -->
+                                    {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Delete
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h1 class="modal-title fs-5 text-black" id="exampleModalLabel">Delete Confirmation</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body text-black">
+                                                Are you sure want to delete {{ $product->name }}?
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                                            {{-- <form action="{{route('delete', $product->id)}}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger">Yes</button>
+                                            </form>
+                                        </div>
+                                        </div>
+                                    </div> --}}
+                                </div>
                               </td>
 
                             </tr>
