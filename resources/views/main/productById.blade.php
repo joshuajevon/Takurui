@@ -18,9 +18,9 @@
 
                 <div class="d-flex flex-column border p-lg-4 p-3 border-dark gap-lg-4 gap-0">
                     <div class="overflow-hidden d-flex justify-content-center align-items-center" style="height: 500px">
-                        <img src="{{ asset('assets/temp/sample-2.png')}}" class="object-fit-contain h-100" alt="{{ $product->name }}">
+                        {{-- <img src="{{ asset('assets/temp/sample-2.png')}}" class="object-fit-contain h-100" alt="{{ $product->name }}"> --}}
 
-                        {{-- <img src="{{asset('/storage/image/'.$product->image)}}" class="col-lg-6 col-4 object-fit-contain" style="width: 40vw; border-radius:50px" alt="product"> --}}
+                        <img src="{{asset('/storage/image/'.$product->image)}}" class="object-fit-contain h-100" alt=" product">
                     </div>
 
                     <div class="d-flex flex-column gap-lg-2 gap-1 ps-lg-0 ps-3 mt-4">
