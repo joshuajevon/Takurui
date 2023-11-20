@@ -69,11 +69,13 @@ Route::middleware('isAdmin')->group(function(){
             Route::get('/create-category', [CategoryController::class, 'createCategory'])->name('createCategory');
             Route::post('/store-category', [CategoryController::class, 'storeCategory'])->name('storeCategory');
             Route::get('/view-product/{id}', [ProductController::class, 'viewProductById'])->name('viewProductById');
-            // Route::get('/list-dashboard', [ShopController::class, 'listDashboard'])->name('listDashboard');
+        });
 
-            // Route::get('/{status}', [ShopController::class, 'filterPayments']);
-            // Route::post('/verify/{id}', [ShopController::class, 'verifyPayment'])->name('verifyPayment');
-            // Route::post('/reject/{id}', [ShopController::class, 'rejectPayment'])->name('rejectPayment');
+        Route::prefix('/payment')->group(function(){
+            Route::get('/', [DashboardController::class, 'adminPaymentDashboard'])->name('adminPaymentDashboard');
+            Route::get('/{status}', [DashboardController::class, 'filterPayments']);
+            Route::post('/verify/{id}', [DashboardController::class, 'verifyPayment'])->name('verifyPayment');
+            Route::post('/reject/{id}', [DashboardController::class, 'rejectPayment'])->name('rejectPayment');
         });
 
     });

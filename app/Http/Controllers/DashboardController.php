@@ -34,4 +34,30 @@ class DashboardController extends Controller
         $cart_count = Cart::count();
         return view('user.myorderbyid',compact('order','cart_count'));
     }
+
+    public function adminPaymentDashboard(){
+        $orders = Order::all();
+        $cart_count = Cart::count();
+        return view('admin.payment.dashboard', compact('orders','cart_count'));
+    }
+
+    public function verifyPayment($id){
+        Order::where('id','=',$id)->update([
+            'payment_status' => 'accepted'
+        ]);
+        return redirect(route('adminPaymentDashboard'));
+    }
+
+    public function rejectPayment($id){
+        Order::where('id','=',$id)->update([
+            'payment_status' => 'rejected'
+        ]);
+        return redirect(route('adminPaymentDashboard'));
+    }
+
+    public function filterPayments(Request $request, $status) {
+        $orders = Order::where('payment_status','=', $status)->paginate(10);
+        $cart_count = Cart::count();
+        return view('admin.payment.dashboard', compact('orders','cart_count'));
+    }
 }

@@ -12,8 +12,8 @@
             <div class="pt-5">
                 <div class="container min-vh-100 d-flex flex-column gap-4">
                     <nav class="nav nav-pills nav-fill">
-                        <a href="/admin/product/" class="nav-link bg-dark text-light fw-semibold">Product</a>
-                        <a href="/admin/product/list-dashboard/" class="nav-link fw-semibold text-dark">Payment</a>
+                        <a href="{{route('adminProductDashboard')}}" class="nav-link bg-dark text-light fw-semibold">Product</a>
+                        <a href="{{route('adminPaymentDashboard')}}" class="nav-link fw-semibold text-dark">Payment</a>
                     </nav>
 
                     <a class="text-light text-decoration-none" href="/admin/product/create-category">
@@ -56,18 +56,14 @@
                               <td class="p-2 d-flex justify-content-center gap-2">
                                  <a href="{{ route('viewProductById', $product->id) }}" class="btn btn-primary">View</a>
                                   <a href="{{route('edit', $product->id)}}" class="btn btn-success">Edit</a>
-                                  <form action="{{route('delete', $product->id)}}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn btn-danger">Delete</button>
-                                </form>
+
                                   <!-- Button trigger modal -->
-                                    {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $product->id }}">
                                         Delete
                                     </button>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="exampleModal_{{ $product->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -79,15 +75,14 @@
                                             </div>
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                            {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
-                                            {{-- <form action="{{route('delete', $product->id)}}" method="POST" class="d-inline">
+                                            <form action="{{route('delete', $product->id)}}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('delete')
                                                 <button class="btn btn-danger">Yes</button>
                                             </form>
                                         </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                 </div>
                               </td>
                             </tr>
