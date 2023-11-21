@@ -38,9 +38,9 @@
                                     <div class="d-flex gap-3">
                                         <div style="width: 150px">
                                             <div class="overflow-hidden ratio ratio-1x1">
-                                                <img src="{{ asset('assets/temp/sample-2.png')}}" class="object-fit-cover w-100 h-100" alt="{{ $cart->products->name }}">
+                                                {{-- <img src="{{ asset('assets/temp/sample-2.png')}}" class="object-fit-cover w-100 h-100" alt="{{ $cart->products->name }}"> --}}
 
-                                                {{-- <img src="{{ asset('/storage/image/' . $cart->products->image) }}" width="100" height="100" class="img-responsive" /> --}}
+                                                <img src="{{ asset('/storage/image/' . $cart->products->image) }}" width="100" height="100" class="img-responsive" />
                                             </div>
                                         </div>
                                         <div class="w-100">
