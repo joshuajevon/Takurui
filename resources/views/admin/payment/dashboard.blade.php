@@ -13,6 +13,7 @@
                     <nav class="nav nav-pills nav-fill">
                         <a href="{{route('adminProductDashboard')}}" class="nav-link fw-semibold text-dark">Product</a>
                         <a href="{{route('adminPaymentDashboard')}}" class="nav-link  bg-dark text-light fw-semibold">Payment</a>
+                        <a href="{{route('adminShipmentDashboard')}}" class="nav-link fw-semibold text-dark">Shipment</a>
                     </nav>
 
                     <table class="table table-sm table-dark table-hover table-striped text-center">
@@ -21,6 +22,7 @@
                                 <th scope="col" class="p-2">Order Id </th>
                                 <th scope="col" class="p-2">User Name</th>
                                 <th scope="col" class="p-2">Total Price</th>
+                                <th scope="col" class="p-2">Payment Method</th>
                                 <th scope="col" class="p-2">Status</th>
                                 <th scope="col" class="p-2">Action</th>
                             </tr>
@@ -46,6 +48,7 @@
                                 <td class="p-2">{{$order->id}}</td>
                                 <td class="p-2">{{$order->user->name}}</td>
                                 <td class="p-2">@currency($order->total_price)</td>
+                                <td class="p-2">{{$order->payment_method}}</td>
                                 <td class="p-2">
                                     @if (str_contains($order->payment_status, 'paid'))
                                     <div>
@@ -136,6 +139,78 @@
                                 </td>
                             </tr>
                             @endforeach
+
+                            {{-- PAGINATION --}}
+                            @if ($orders->hasPages())
+                            <nav class="d-flex justify-items-center justify-content-between w-100">
+                                <div class="d-flex justify-content-between flex-fill d-sm-none">
+                                    <ul class="pagination">
+                                        {{-- Previous Page Link --}}
+                                        @if ($orders->onFirstPage())
+                                        <li class="page-item disabled" aria-disabled="true">
+                                            <span class="page-link">@lang('pagination.previous')</span>
+                                        </li>
+                                        @else
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ $orders->previousPageUrl() }}" rel="prev">@lang('pagination.previous')</a>
+                                        </li>
+                                        @endif
+
+                                        {{-- Next Page Link --}}
+                                        @if ($orders->hasMorePages())
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ $orders->nextPageUrl() }}" rel="next">@lang('pagination.next')</a>
+                                        </li>
+                                        @else
+                                        <li class="page-item disabled" aria-disabled="true">
+                                            <span class="page-link">@lang('pagination.next')</span>
+                                        </li>
+                                        @endif
+                                    </ul>
+                                </div>
+
+                                <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between">
+                                    <div>
+                                        <p class="small text-muted">
+                                            {!! __('Showing') !!}
+                                            <span class="fw-semibold">{{ $orders->firstItem() }}</span>
+                                            {!! __('to') !!}
+                                            <span class="fw-semibold">{{ $orders->lastItem() }}</span>
+                                            {!! __('of') !!}
+                                            <span class="fw-semibold">{{ $orders->total() }}</span>
+                                            {!! __('results') !!}
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <ul class="pagination">
+                                            {{-- Previous Page Link --}}
+                                            @if ($orders->onFirstPage())
+                                            <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
+                                                <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                                            </li>
+                                            @else
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $orders->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                                            </li>
+                                            @endif
+
+                                            {{-- Next Page Link --}}
+                                            @if ($orders->hasMorePages())
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $orders->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                                            </li>
+                                            @else
+                                            <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
+                                                <span class="page-link" aria-hidden="true">&rsaquo;</span>
+                                            </li>
+                                            @endif
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                            @endif
+                            
                         </tbody>
                     </table>
                 </div>

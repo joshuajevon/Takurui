@@ -78,6 +78,15 @@ Route::middleware('isAdmin')->group(function(){
             Route::post('/reject/{id}', [DashboardController::class, 'rejectPayment'])->name('rejectPayment');
         });
 
+        Route::prefix('/shipment')->group(function(){
+            Route::get('/', [DashboardController::class, 'adminShipmentDashboard'])->name('adminShipmentDashboard');
+            Route::get('/{status}', [DashboardController::class, 'filterShipments']);
+            Route::post('/pending/{id}', [DashboardController::class, 'pendingShipment'])->name('pendingShipment');
+            Route::post('/processing/{id}', [DashboardController::class, 'processingShipment'])->name('processingShipment');
+            Route::post('/shipped/{id}', [DashboardController::class, 'shippedShipment'])->name('shippedShipment');
+            Route::post('/delivered/{id}', [DashboardController::class, 'deliveredShipment'])->name('deliveredShipment');
+        });
+
     });
 
 });

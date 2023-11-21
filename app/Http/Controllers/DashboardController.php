@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
+    // user dashboard
     public function dashboard(){
         $cart_count = Cart::count();
         return view('user.dashboard', compact('cart_count'));
@@ -35,8 +36,10 @@ class DashboardController extends Controller
         return view('user.myorderbyid',compact('order','cart_count'));
     }
 
+
+    // admin dashboard payment
     public function adminPaymentDashboard(){
-        $orders = Order::all();
+        $orders = Order::paginate(10);
         $cart_count = Cart::count();
         return view('admin.payment.dashboard', compact('orders','cart_count'));
     }
@@ -59,5 +62,46 @@ class DashboardController extends Controller
         $orders = Order::where('payment_status','=', $status)->paginate(10);
         $cart_count = Cart::count();
         return view('admin.payment.dashboard', compact('orders','cart_count'));
+    }
+
+    // admin dashboard shipment
+    public function adminShipmentDashboard(){
+        $orders = Order::paginate(10);
+        $cart_count = Cart::count();
+        return view('admin.shipment.dashboard', compact('orders','cart_count'));
+    }
+
+    public function pendingShipment($id){
+        Order::where('id','=',$id)->update([
+            'shipment_status' => 'Pending'
+        ]);
+        return redirect(route('adminShipmentDashboard'));
+    }
+
+    public function processingShipment($id){
+        Order::where('id','=',$id)->update([
+            'shipment_status' => 'Processing'
+        ]);
+        return redirect(route('adminShipmentDashboard'));
+    }
+
+    public function shippedShipment($id){
+        Order::where('id','=',$id)->update([
+            'shipment_status' => 'Shipped'
+        ]);
+        return redirect(route('adminShipmentDashboard'));
+    }
+
+    public function deliveredShipment($id){
+        Order::where('id','=',$id)->update([
+            'shipment_status' => 'Delivered'
+        ]);
+        return redirect(route('adminShipmentDashboard'));
+    }
+
+    public function filterShipments(Request $request, $status) {
+        $orders = Order::where('shipment_status','=', $status)->paginate(10);
+        $cart_count = Cart::count();
+        return view('admin.shipment.dashboard', compact('orders','cart_count'));
     }
 }

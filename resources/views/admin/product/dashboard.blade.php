@@ -14,6 +14,7 @@
                     <nav class="nav nav-pills nav-fill">
                         <a href="{{route('adminProductDashboard')}}" class="nav-link bg-dark text-light fw-semibold">Product</a>
                         <a href="{{route('adminPaymentDashboard')}}" class="nav-link fw-semibold text-dark">Payment</a>
+                        <a href="{{route('adminShipmentDashboard')}}" class="nav-link fw-semibold text-dark">Shipment</a>
                     </nav>
 
                     <a class="text-light text-decoration-none" href="/admin/product/create-category">

@@ -91,12 +91,12 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="5" class="text-right">
-                                    <h3><strong>Total @currency($totalPrice)</strong></h3>
+                                <td colspan="6" class="text-right">
+                                    <h3><strong>Total: @currency($totalPrice)</strong></h3>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="5" class="text-right">
+                                <td colspan="6" class="text-right">
                                     <a href="{{ url('/') }}" class="btn btn-danger"> <i class="fa fa-arrow-left"></i>
                                         Continue
                                         Shopping</a>
