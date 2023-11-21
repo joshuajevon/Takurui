@@ -18,7 +18,7 @@
 </head>
 <body>
     <div class="row p-0 m-0">
-        <div id="register-container" class="pb-5 col-12 col-xl-8 d-flex flex-column px-5 overflow-y-scroll vh-100" style="padding-top: 10rem;">
+        <div id="register-container" class="col-12 col-xl-8 d-flex flex-column px-5 overflow-y-scroll vh-100" style="padding: 10rem 0">
             <div>
                 <h1 class="fw-bold mb-4">
                     {{ __('Register') }}
@@ -33,7 +33,7 @@
                         <label for="name" class="col-md-12 col-form-label fw-bold">{{ __('Name') }}</label>
 
                         <div class="col-12">
-                            <input id="name" type="text" class="py-3 rounded-0 form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" placeholder="Insert your name">
+                            <input id="name" type="text" class="py-3 rounded-0 form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" placeholder="Insert your name">
 
                             @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -48,7 +48,7 @@
                         <label for="email" class="col-12 col-form-label fw-bold">{{ __('Email') }}</label>
 
                         <div class="col-12">
-                            <input id="email" type="email" class="py-3 rounded-0 form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email" placeholder="Insert your email">
+                            <input id="email" type="email" class="py-3 rounded-0 form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" placeholder="Insert your email">
 
                             @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -63,7 +63,7 @@
                         <label for="phoneNumber" class="col-12 col-form-label fw-bold">{{ __('Phone Number') }}</label>
 
                         <div class="col-12">
-                            <input id="phoneNumber" type="text" class="py-3 rounded-0 form-control @error('phoneNumber') is-invalid @enderror" name="phoneNumber" value="{{ old('phoneNumber') }}"  autocomplete="phoneNumber" placeholder="Insert your phone number">
+                            <input id="phoneNumber" type="text" class="py-3 rounded-0 form-control @error('phoneNumber') is-invalid @enderror" name="phoneNumber" value="{{ old('phoneNumber') }}" autocomplete="phoneNumber" placeholder="Insert your phone number">
 
                             @error('phoneNumber')
                             <span class="invalid-feedback" role="alert">
@@ -78,7 +78,7 @@
                         <label for="password" class="col-12 col-form-label fw-bold">{{ __('Password') }}</label>
 
                         <div class="col-12">
-                            <input id="password" type="password" class="py-3 rounded-0 form-control @error('password') is-invalid @enderror" name="password"  autocomplete="current-password" placeholder="Insert your password">
+                            <input id="password" type="password" class="py-3 rounded-0 form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password" placeholder="Insert your password">
 
                             @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -93,7 +93,7 @@
                         <label for="password-confirm" class="col-12 col-form-label fw-bold">{{ __('Confirm Password') }}</label>
 
                         <div class="col-12">
-                            <input id="password-confirm" type="password" class="py-3 rounded-0 form-control" name="password_confirmation"  autocomplete="new-password" placeholder="Insert your password">
+                            <input id="password-confirm" type="password" class="py-3 rounded-0 form-control" name="password_confirmation" autocomplete="new-password" placeholder="Insert your password">
                         </div>
                     </div>
 
@@ -102,7 +102,7 @@
                         <label for="dob" class="col-12 col-form-label fw-bold">{{ __('Date of Birth') }}</label>
 
                         <div class="col-12">
-                            <input id="dob" type="date" class="py-3 rounded-0 form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}"  autocomplete="dob" class="Insert your date of birth">
+                            <input id="dob" type="date" class="py-3 rounded-0 form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" autocomplete="dob" class="Insert your date of birth">
 
                             @error('dob')
                             <span class="invalid-feedback" role="alert">
@@ -127,9 +127,9 @@
                                 <label for="female">Female</label>
                             </div>
                             @error('gender')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                         <label for="address" class="col-12 col-form-label fw-bold">{{ __('Address') }}</label>
 
                         <div class="col-12">
-                            <input id="address" class="py-3 rounded-0 form-control @error('address') is-invalid @enderror" type="text" name="address" value="{{old('address')}}"  autofocus autocomplete="address" placeholder="Insert your address" />
+                            <input id="address" class="py-3 rounded-0 form-control @error('address') is-invalid @enderror" type="text" name="address" value="{{old('address')}}" autofocus autocomplete="address" placeholder="Insert your address" />
 
                             @error('address')
                             <span class="invalid-feedback" role="alert">
@@ -195,4 +195,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
-

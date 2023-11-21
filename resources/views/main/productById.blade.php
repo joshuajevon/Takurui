@@ -23,7 +23,7 @@
                         <img src="{{asset('/storage/image/'.$product->image)}}" class="object-fit-contain h-100" alt=" product">
                     </div>
 
-                    <div class="d-flex flex-column gap-lg-2 gap-1 ps-lg-0 ps-3 mt-4">
+                    <div class="d-flex flex-column gap-lg-2 gap-1 mt-4">
                         <p class="fs-1 p-0 m-0 fw-bold">
                             {{$product->name}}
                         </p>
@@ -79,10 +79,9 @@
                         @endguest
 
                         @auth
-                        <form action="{{route('addToCart', $product->id)}}" method="POST" class="">
+                        <form action="{{route('addToCart', $product->id)}}" method="POST" class="d-flex flex-column gap-lg-2 gap-1 mt-4">
                             @csrf
-
-                            <select class="form-select" aria-label="Default select example" name="size">
+                            <select class="py-3 mt-3 form-select w-100" aria-label="Default select example" name="size">
                                 <option selected disabled>Select Size</option>
                                 <option value="S">S</option>
                                 <option value="M">M</option>
@@ -90,13 +89,13 @@
                                 <option value="XL">XL</option>
                                 <option value="XXL">XXL</option>
                             </select>
-                            <br>
+
                             @error('size')
-                                <div class="alert alert-danger" role="alert">
-                                    {{$message}}
-                                </div>
+                            <div class="alert alert-danger m-0" role="alert">
+                                {{$message}}
+                            </div>
                             @enderror
-                            <button type="submit" href="{{ route('addToCart', $product->id) }}" class="btn btn-dark rounded text-light fw-semibold p-3">Add To
+                            <button type="submit" href="{{ route('addToCart', $product->id) }}" class="btn btn-dark text-light fw-semibold p-3">Add To
                                 Cart</button>
 
                         </form>

@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="pb-5 col-12 col-xl-8 d-flex flex-column justify-content-center px-5 vh-100" style="padding-top: 10rem;">
+        <div class="py-5 col-12 col-xl-8 d-flex flex-column justify-content-center px-5 vh-100">
             <div>
                 <h1 class="fw-bold mb-4">
                     {{ __('Login') }}
