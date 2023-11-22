@@ -71,30 +71,11 @@ class DashboardController extends Controller
         return view('admin.shipment.dashboard', compact('orders','cart_count'));
     }
 
-    public function pendingShipment($id){
-        Order::where('id','=',$id)->update([
-            'shipment_status' => 'Pending'
-        ]);
-        return redirect(route('adminShipmentDashboard'));
-    }
-
-    public function processingShipment($id){
-        Order::where('id','=',$id)->update([
-            'shipment_status' => 'Processing'
-        ]);
-        return redirect(route('adminShipmentDashboard'));
-    }
-
-    public function shippedShipment($id){
-        Order::where('id','=',$id)->update([
-            'shipment_status' => 'Shipped'
-        ]);
-        return redirect(route('adminShipmentDashboard'));
-    }
-
-    public function deliveredShipment($id){
-        Order::where('id','=',$id)->update([
-            'shipment_status' => 'Delivered'
+    public function updateShipment(Request $request, $id){
+        $order = Order::findOrFail($id);
+        $cart_count = Cart::count();
+        $order->update([
+            'shipment_status' =>$request->shipment_status,
         ]);
         return redirect(route('adminShipmentDashboard'));
     }

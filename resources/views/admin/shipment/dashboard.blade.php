@@ -19,11 +19,11 @@
                     <table class="table table-sm table-dark table-hover table-striped text-center">
                         <thead>
                             <tr>
-                                <th scope="col" class="p-2">Order Id </th>
-                                <th scope="col" class="p-2">User Name</th>
-                                <th scope="col" class="p-2">Shipping Address</th>
-                                <th scope="col" class="p-2">Status</th>
-                                <th scope="col" class="p-2">Action</th>
+                                <th scope="col" style="width: 10px" class="p-2">Order Id </th>
+                                <th scope="col" style="width: 10px" class="p-2">User Name</th>
+                                <th scope="col" style="width: 10px" class="p-2" >Shipping Address</th>
+                                <th scope="col" style="width: 10px" class="p-2">Status</th>
+                                <th scope="col" style="width: 10px" class="p-2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,28 +52,23 @@
                                 <td class="p-2">{{ $order->shipping_address }}</td>
                                 <td class="p-2">{{$order->shipment_status}}</td>
                                 <td class="p-2">
-
-
-                                    <form action="{{ route('pendingShipment', $order->id) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('updateShipment', $order->id) }}" class="d-flex flex-row gap-2" method="POST">
                                         @csrf
-                                        <button class="btn btn-primary ">Pending</button>
-                                    </form>
+                                        @method('patch')
+                                        <select class="form-select" aria-label="Default select example" name="shipment_status">
+                                            <option value="Pending" @if($order->shipment_status == 'Pending') selected @endif>Pending</option>
+                                            <option value="Processing" @if($order->shipment_status == "Processing") selected @endif>Processing</option>
+                                            <option value="Shipped" @if($order->shipment_status == 'Shipped') selected @endif>Shipped</option>
+                                            <option value="Delivered" @if($order->shipment_status == 'Delivered') selected @endif>Delivered</option>
+                                        </select>
 
-                                    <form action="{{ route('processingShipment', $order->id) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        <button class="btn btn-primary">Processing</button>
+                                        <button class="btn btn-success" type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy-fill" viewBox="0 0 16 16">
+                                                <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0H3v5.5A1.5 1.5 0 0 0 4.5 7h7A1.5 1.5 0 0 0 13 5.5V0h.086a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5H14v-5.5A1.5 1.5 0 0 0 12.5 9h-9A1.5 1.5 0 0 0 2 10.5V16h-.5A1.5 1.5 0 0 1 0 14.5z"/>
+                                                <path d="M3 16h10v-5.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9-16H4v5.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5zM9 1h2v4H9z"/>
+                                              </svg>
+                                        </button>
                                     </form>
-
-                                    <form action="{{ route('shippedShipment', $order->id) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        <button class="btn btn-primary">Shipped</button>
-                                    </form>
-
-                                    <form action="{{ route('deliveredShipment', $order->id) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        <button class="btn btn-primary">Delivered</button>
-                                    </form>
-
                                 </td>
                             </tr>
                             @endforeach
