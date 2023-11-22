@@ -59,14 +59,12 @@ class ProductController extends Controller
 
      public function adminProductDashboard(){
         $products = Product::paginate(10);
-        $cart_count = Cart::count();
-        return view('admin.product.dashboard', compact('products','cart_count'));
+        return view('admin.product.dashboard', compact('products'));
     }
 
     public function createProduct(){
         $categories = Category::all();
-        $cart_count = Cart::count();
-        return view('admin.product.createProduct', compact('categories','cart_count'));
+        return view('admin.product.createProduct', compact('categories'));
     }
 
     public function storeProduct(Request $request){
@@ -96,14 +94,13 @@ class ProductController extends Controller
         return redirect('/admin/product/');
     }
 
-    public function edit($id){
+    public function editProduct($id){
         $product = Product::findOrFail($id);
-        $cart_count = Cart::count();
         $categories = Category::all();
-        return view('admin.product.editProduct', compact('product','cart_count','categories'));
+        return view('admin.product.editProduct', compact('product','categories'));
     }
 
-    public function update(Request $request, $id){
+    public function updateProduct(Request $request, $id){
 
         $request->validate([
             'name' => 'required',
@@ -134,14 +131,13 @@ class ProductController extends Controller
         return redirect('/admin/product/');
     }
 
-    public function delete($id){
+    public function deleteProduct($id){
         Product::destroy($id);
         return redirect('/admin/product/');
     }
 
     public function viewProductById($id){
         $product = Product::findOrFail($id);
-        $cart_count = Cart::count();
-        return view('admin.product.viewProduct', compact('product','cart_count'));
+        return view('admin.product.viewProduct', compact('product'));
     }
 }

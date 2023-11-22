@@ -40,14 +40,17 @@ class DashboardController extends Controller
     // admin dashboard payment
     public function adminPaymentDashboard(){
         $orders = Order::paginate(10);
-        $cart_count = Cart::count();
-        return view('admin.payment.dashboard', compact('orders','cart_count'));
+        return view('admin.payment.dashboard', compact('orders'));
     }
 
     public function verifyPayment($id){
-        Order::where('id','=',$id)->update([
-            'payment_status' => 'accepted'
+        $order = Order::findOrFail($id);
+
+        $order->update([
+            'payment_status' => 'accepted',
+            'shipment_status' => "Processing",
         ]);
+
         return redirect(route('adminPaymentDashboard'));
     }
 
@@ -60,20 +63,17 @@ class DashboardController extends Controller
 
     public function filterPayments(Request $request, $status) {
         $orders = Order::where('payment_status','=', $status)->paginate(10);
-        $cart_count = Cart::count();
-        return view('admin.payment.dashboard', compact('orders','cart_count'));
+        return view('admin.payment.dashboard', compact('orders'));
     }
 
     // admin dashboard shipment
     public function adminShipmentDashboard(){
         $orders = Order::paginate(10);
-        $cart_count = Cart::count();
-        return view('admin.shipment.dashboard', compact('orders','cart_count'));
+        return view('admin.shipment.dashboard', compact('orders'));
     }
 
     public function updateShipment(Request $request, $id){
         $order = Order::findOrFail($id);
-        $cart_count = Cart::count();
         $order->update([
             'shipment_status' =>$request->shipment_status,
         ]);
@@ -82,7 +82,52 @@ class DashboardController extends Controller
 
     public function filterShipments(Request $request, $status) {
         $orders = Order::where('shipment_status','=', $status)->paginate(10);
-        $cart_count = Cart::count();
-        return view('admin.shipment.dashboard', compact('orders','cart_count'));
+        return view('admin.shipment.dashboard', compact('orders'));
+    }
+
+    // admin dashboard user
+
+    public function adminUserDashboard(){
+        $users = User::paginate(10);
+        return view('admin.user.dashboard', compact('users'));
+    }
+
+    public function editUser($id){
+        $user = User::findOrFail($id);
+        return view('admin.user.editUser', compact('user'));
+    }
+
+    public function viewUser($id){
+        $user = User::findOrFail($id);
+        return view('admin.user.viewUser', compact('user'));
+    }
+
+    public function updateUser(Request $request, $id){
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phoneNumber' => 'required|integer',
+            'dob' => 'required|date',
+            'gender' => 'required',
+            'address' => 'required'
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phoneNumber' => $request->phoneNumber,
+            'dob' => $request->dob,
+            'gender' => $request->gender,
+            'address' => $request->address,
+        ]);
+        return redirect('/admin/user/');
+    }
+
+    public function deleteUser($id){
+        User::destroy($id);
+        return redirect(route('adminUserDashboard'));
     }
 }

@@ -48,27 +48,34 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('/update-payment/{id}', [ShopController::class, 'updatePayment'])->name('updatePayment');
 
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
 });
 
 Auth::routes();
 
-
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 Route::middleware('isAdmin')->group(function(){
 
     Route::prefix('/admin')->group(function(){
-        //product
+
         Route::prefix('/product')->group(function(){
             Route::get('/', [ProductController::class, 'adminProductDashboard'])->name('adminProductDashboard');
             Route::get('/create-product', [ProductController::class, 'createProduct'])->name('createProduct');
             Route::post('/store-product', [ProductController::class, 'storeProduct'])->name('storeProduct');
-            Route::get('/edit-product/{id}', [ProductController::class, 'edit'])->name('edit');
-            Route::patch('/update-product/{id}', [ProductController::class, 'update'])->name('update');
-            Route::delete('/delete-product/{id}', [ProductController::class, 'delete'])->name('delete');
+            Route::get('/edit-product/{id}', [ProductController::class, 'editProduct'])->name('editProduct');
+            Route::patch('/update-product/{id}', [ProductController::class, 'updateProduct'])->name('updateProduct');
+            Route::delete('/delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('deleteProduct');
             Route::get('/create-category', [CategoryController::class, 'createCategory'])->name('createCategory');
             Route::post('/store-category', [CategoryController::class, 'storeCategory'])->name('storeCategory');
             Route::get('/view-product/{id}', [ProductController::class, 'viewProductById'])->name('viewProductById');
+        });
+
+        Route::prefix('/user')->group(function(){
+            Route::get('/', [DashboardController::class, 'adminUserDashboard'])->name('adminUserDashboard');
+            Route::get('/edit-user/{id}', [DashboardController::class, 'editUser'])->name('editUser');
+            Route::patch('/update-user/{id}', [DashboardController::class, 'updateUser'])->name('updateUser');
+            Route::delete('/delete-user/{id}', [DashboardController::class, 'deleteUser'])->name('deleteUser');
+            Route::get('/view-user/{id}', [DashboardController::class, 'viewUser'])->name('viewUser');
         });
 
         Route::prefix('/payment')->group(function(){

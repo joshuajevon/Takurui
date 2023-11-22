@@ -48,17 +48,7 @@
 <div class="pt-5 pb-lg-5">
     <div class="container py-5 d-flex flex-column align-items-center">
         <h1 class="text-center display-3 w-100">LATEST PRODUCTS</h1>
-        @can('isAdmin')
-        <a class="text-light text-decoration-none mt-3" href="/admin/product/create-product">
-            <button type="button" class="btn btn-primary p-lg-2 px-lg-3 px-2 p-1 d-flex justify-content-center align-items-center gap-2 fw-semibold">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                </svg>Add Item
-            </button>
-        </a>
-        @endcan
-
+        <p class="text-center fs-5 w-100">Elevate your lifestyle with our latest innovation</p>
         <div class="row gy-4 gy-lg-5 g-3 g-lg-4 w-100 pt-4">
             {{-- Show 4 produk terbaru --}}
             @foreach ($products as $product)
@@ -89,7 +79,7 @@
 <div class="py-lg-5">
     <div class="container py-5 d-flex flex-column align-items-center">
         <h1 class="text-center display-3 w-100">LIMITED PRODUCTS</h1>
-
+        <p class="text-center fs-5 w-100">Grab yours now, before it's gone!</p>
         <div class="row gy-4 gy-lg-5 g-3 g-lg-4 w-100 pt-4">
             @foreach ($limitedEdition as $product)
             <div class="product-card col-lg-3 col-6">
@@ -111,7 +101,7 @@
             @endforeach
         </div>
 
-        <a href="/products" class="btn btn-dark py-2 py-sm-3 px-4 px-sm-5 text-center text-light mt-4 mt-lg-5 rounded-0" style="width: fit-content">SHOP ALL</a>
+        <a href="/products/1" class="btn btn-dark py-2 py-sm-3 px-4 px-sm-5 text-center text-light mt-4 mt-lg-5 rounded-0" style="width: fit-content">SHOP ALL</a>
     </div>
 </div>
 

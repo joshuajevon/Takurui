@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('template.admin-template', [$pages="shipment"])
 
 @section('head')
 
@@ -6,16 +6,10 @@
 
 @section('body')
 
-    <div class="pt-5">
-        <div class="pt-5">
+        <div class="pt-3">
             <div class="pt-5">
                 <div class="container min-vh-100 d-flex flex-column gap-4">
-                    <nav class="nav nav-pills nav-fill">
-                        <a href="{{route('adminProductDashboard')}}" class="nav-link fw-semibold text-dark">Product</a>
-                        <a href="{{route('adminPaymentDashboard')}}" class="nav-link fw-semibold text-dark">Payment</a>
-                        <a href="{{route('adminShipmentDashboard')}}" class="nav-link  bg-dark text-light fw-semibold">Shipment</a>
-                    </nav>
-
+                    <h1>Shipments</h1>
                     <table class="table table-sm table-dark table-hover table-striped text-center">
                         <thead>
                             <tr>
@@ -149,6 +143,5 @@
                 </div>
             </div>
         </div>
-    </div>
 
 @endsection

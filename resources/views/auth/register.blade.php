@@ -126,13 +126,12 @@
                                 <input type="radio" id="female" name="gender" value="female" @if (old('gender')=="female" ) checked @endif>
                                 <label for="female">Female</label>
                             </div>
-                            @error('gender')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
                         </div>
+                        @error('gender')
+                            <div class="fw-bold" style="color: #e44044; font-size: 14px" role="alert">{{ $message }}</div>
+                        @enderror
                     </div>
+
 
                     {{-- ADDRESS --}}
                     <div class="row mb-3">

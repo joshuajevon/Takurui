@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('template.admin-template', [$pages="products"])
 
 @section('head')
     {{-- css js --}}
@@ -7,9 +7,9 @@
 
 @section('body')
 
-    <div class="py-5">
-        <div class="py-5">
-            <div class="container py-5">
+    <div class="pt-3">
+        <div class="pt-5">
+            <div class="container min-vh-100 d-flex flex-column gap-4">
                 <div class="d-flex flex-row gap-5">
                     <a href="{{ route('adminProductDashboard') }}" class="btn btn-dark d-flex justify-content-center align-items-center fw-semibold" style="width: fit-content;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
