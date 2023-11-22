@@ -17,9 +17,9 @@
                     <div class="d-flex flex-column flex-lg-row gap-2 gap-lg-3">
                         <div style="width: 150px">
                             <div class="overflow-hidden ratio ratio-1x1">
-                                <img src="{{ asset('assets/temp/sample-2.png')}}" class="object-fit-cover w-100 h-100" alt="{{ $cart->products->name }}">
+                                {{-- <img src="{{ asset('assets/temp/sample-2.png')}}" class="object-fit-cover w-100 h-100" alt="{{ $cart->products->name }}"> --}}
 
-                                {{-- <img src="{{ asset('/storage/image/' . $cart->products->image) }}" width="100" height="100" class="img-responsive" /> --}}
+                                <img src="{{ asset('/storage/image/' . $cart->products->image) }}" width="100" height="100" class="img-responsive" />
                             </div>
                         </div>
 
@@ -70,28 +70,40 @@
 
                     <form action="{{ route('storeOrder') }}" method="POST" enctype="multipart/form-data" class="d-flex flex-column gap-5">
                         @csrf
-                        <div class="fs-5">
+                        <div class="d-flex flex-column gap-3 fs-5">
                             <label for="payment_method" class="fs-2 fw-bold">{{ __('Payment Method:') }}</label>
 
-                            <div class="">
-                                <input type="radio" id="gopay" name="payment_method" value="gopay" @if (old('payment_method')=="gopay" ) checked @endif>
-                                <label for="gopay">Gopay</label>
+                            <p>Bank Transfer</p>
+                            <div class="btn-group" data-toggle="buttons" id="btn-group-id">
+                                <label class="btn btn-primary">
+                                    <input type="radio" id="BCA" name="payment_method" value="BCA" @if (old('payment_method')=="BCA" ) checked @endif>
+                                    BCA
+                                </label>
                             </div>
 
-                            <div class="">
-                                <input type="radio" id="BCA" name="payment_method" value="BCA" @if (old('payment_method')=="BCA" ) checked @endif>
-                                <label for="BCA">BCA</label>
+                            <div class="btn-group" data-toggle="buttons" id="btn-group-id">
+                                <label class="btn btn-primary">
+                                    <input type="radio" id="mandiri" name="payment_method" value="Mandiri" @if (old('payment_method')=="Mandiri" ) checked @endif>
+                                  Mandiri
+                                </label>
                             </div>
 
-                            <div class="">
-                                <input type="radio" id="ovo" name="payment_method" value="ovo" @if (old('payment_method')=="ovo" ) checked @endif>
-                                <label for="ovo">Ovo</label>
+                            <p>E-Wallet</p>
+
+                            <div class="btn-group" data-toggle="buttons" id="btn-group-id">
+                                <label class="btn btn-primary">
+                                    <input type="radio" id="gopay" name="payment_method" value="Gopay" @if (old('payment_method')=="Gopay" ) checked @endif>
+                                    Gopay
+                                </label>
                             </div>
 
-                            <div class="">
-                                <input type="radio" id="utang" name="payment_method" value="utang" @if (old('payment_method')=="utang" ) checked @endif>
-                                <label for="utang">Utang</label>
+                            <div class="btn-group" data-toggle="buttons" id="btn-group-id">
+                                <label class="btn btn-primary">
+                                    <input type="radio" id="ovo" name="payment_method" value="Ovo" @if (old('payment_method')=="Ovo" ) checked @endif>
+                                    Ovo
+                                </label>
                             </div>
+
                             @error('payment_method')
                             <div class="alert alert-danger fs-6 mt-3" role="alert">
                                 {{ $message }}
