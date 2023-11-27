@@ -18,6 +18,11 @@
                     <h1 class="text-center display-3 w-100">Profile</h1>
                 </div>
                 <div class="container min-vh-100 d-flex flex-column gap-4">
+                    @if(session('success'))
+                        <div class="alert alert-success m-0">
+                            {{ session('success') }}
+                        </div>
+                        @endif
                     <div class="mb-3">
                         <label for="exampleInputName" class="form-label">Name</label>
                         <input disabled value="{{$user->name}}" type="text" class="form-control @error('name') is-invalid @enderror" id="exampleInputName" name="name">
@@ -47,6 +52,7 @@
                         <label for="exampleInputAuthor" class="form-label">Address</label>
                         <input disabled value="{{$user->address}}" type="text"  class="form-control @error('address') is-invalid @enderror" id="exampleInputAuthor" name="address">
                     </div>
+                    <a href="{{ route('editProfile', $user->id) }}" class="btn btn-success">Edit</a>
                 </div>
             </div>
         </div>

@@ -42,6 +42,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
 
+    Route::get('/edit-profile/{id}', [DashboardController::class, 'editProfile'])->name('editProfile');
+
+    Route::post('/change-password', [DashboardController::class, 'updatePassword'])->name('updatePassword');
+
+    Route::patch('/update-profile/{id}', [DashboardController::class, 'updateProfile'])->name('updateProfile');
+
     Route::get('/myorder', [DashboardController::class, 'myorder'])->name('myorder');
 
     Route::get('/myorder/{id}', [DashboardController::class, 'myOrderById'])->name('myOrderById');

@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
@@ -15,6 +16,8 @@ class DashboardController extends Controller
         $cart_count = Cart::count();
         return view('user.dashboard', compact('cart_count'));
     }
+
+    // profile
     public function profile(){
         $user_id = Auth::user()->id;
         $user = User::findOrFail($user_id);
@@ -22,6 +25,61 @@ class DashboardController extends Controller
         return view('user.profile', compact('user','cart_count'));
     }
 
+    public function editProfile($id){
+        $user_id = Auth::user()->id;
+        $user = User::findOrFail($user_id);
+        $cart_count = Cart::count();
+
+        return view('user.editProfile', compact('user','cart_count'));
+    }
+
+    public function updateProfile(Request $request, $id){
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phoneNumber' => 'required|integer',
+            'dob' => 'required|date',
+            'gender' => 'required',
+            'address' => 'required'
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phoneNumber' => $request->phoneNumber,
+            'dob' => $request->dob,
+            'gender' => $request->gender,
+            'address' => $request->address,
+        ]);
+        return redirect(route('profile'))->with('success',"Profile changed successfully!");
+    }
+
+    public function updatePassword(Request $request){
+
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+        ]);
+
+        if(!Hash::check($request->old_password, auth()->user()->password)){
+            return back()->with("error", "Old Password Doesn't match!");
+        }
+
+
+        $user_id = Auth::user()->id;
+
+        User::where('id',$user_id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        return redirect(route('profile'))->with('success',"Password changed successfully!");
+    }
+
+
+    // order
     public function myorder(){
         $user_id = Auth::user()->id;
         $order = Order::where('user_id',$user_id)->get();
