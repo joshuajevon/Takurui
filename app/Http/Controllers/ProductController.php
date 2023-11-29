@@ -57,8 +57,13 @@ class ProductController extends Controller
 
      // admin product
 
-     public function adminProductDashboard(){
-        $products = Product::paginate(10);
+     public function adminProductDashboard(Request $request){
+        if($request->input('search')){
+            $products = Product::where('name','like','%' .request('search'). '%')->paginate(10);
+        } else{
+            $products = Product::paginate(10);
+        }
+
         return view('admin.product.dashboard', compact('products'));
     }
 

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            // $table->string('order_number')->unique();
             $table->unsignedBigInteger('total_price');
             $table->set('shipment_status',["Pending","Processing","Shipped","Delivered"])->default('Pending');
             $table->set("payment_status", ["paid", "accepted", "rejected"])->default("paid");

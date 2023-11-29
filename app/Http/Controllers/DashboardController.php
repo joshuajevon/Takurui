@@ -96,8 +96,13 @@ class DashboardController extends Controller
 
 
     // admin dashboard payment
-    public function adminPaymentDashboard(){
-        $orders = Order::paginate(10);
+    public function adminPaymentDashboard(Request $request){
+        $result = $request->input('search');
+        if($result){
+            $orders = Order::where('id','=',$result)->paginate(10);
+        } else{
+            $orders = Order::paginate(10);
+        }
         return view('admin.payment.dashboard', compact('orders'));
     }
 
@@ -125,8 +130,13 @@ class DashboardController extends Controller
     }
 
     // admin dashboard shipment
-    public function adminShipmentDashboard(){
-        $orders = Order::paginate(10);
+    public function adminShipmentDashboard(Request $request){
+        $result = $request->input('search');
+        if($result){
+            $orders = Order::where('id','=',$result)->paginate(10);
+        } else{
+            $orders = Order::paginate(10);
+        }
         return view('admin.shipment.dashboard', compact('orders'));
     }
 
@@ -145,8 +155,14 @@ class DashboardController extends Controller
 
     // admin dashboard user
 
-    public function adminUserDashboard(){
-        $users = User::paginate(10);
+    public function adminUserDashboard(Request $request){
+
+        if($request->input('search')){
+            $users = User::where('name','like','%' .request('search'). '%')->paginate(10);
+        } else{
+            $users = User::paginate(10);
+        }
+
         return view('admin.user.dashboard', compact('users'));
     }
 
