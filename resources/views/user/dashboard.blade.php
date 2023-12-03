@@ -6,7 +6,7 @@
 
 
 @section('body')
-<div class="pt-5 bg-body-secondary">
+<div class="pt-sm-5 bg-body-secondary">
     <div class="pt-5">
         <div class="py-5">
             <div class="py-5 container d-flex flex-column gap-4 gap-lg-5 min-vh-100">

@@ -15,21 +15,30 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <div class="d-flex flex-column gap-4 align-items-center justify-content-center bg-secondary vh-100">
-                    <h1>Welcome to TakuRui</h1>
+                <div class="d-flex flex-column gap-4 align-items-center justify-content-center bg-secondary vh-100 text-white" style="background: url({{asset('assets/home-page/hero-1.jpg')}})  no-repeat center; background-size: cover;">
+                    <h4 class="fs-4">From Screens to Threads: Anime Apparel Redefined</h4>
+                    <h1 class="fs-1 fw-bolder">TakuRui</h1>
                     <a href="" class="btn btn-light py-2 py-sm-3 px-4 px-sm-5 text-center rounded-0">
                         <span class="fs-5">SHOP NOW</span>
                     </a>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-flex align-items-center justify-content-center bg-secondary vh-100">
-                    <h1>Hello World</h1>
+                <div class="d-flex flex-column gap-4 align-items-center justify-content-center bg-secondary vh-100 text-white" style="background: url({{asset('assets/home-page/hero-2.jpg')}})  no-repeat center; background-size: cover;">
+                    <h4 class="fs-4">Anime Couture: Wear Your Passion with Prides</h4>
+                    <h1 class="fs-1 fw-bolder">TakuRui</h1>
+                    <a href="" class="btn btn-light py-2 py-sm-3 px-4 px-sm-5 text-center rounded-0">
+                        <span class="fs-5">SHOP NOW</span>
+                    </a>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="d-flex align-items-center justify-content-center bg-secondary vh-100">
-                    <h1>Hello World</h1>
+                <div class="d-flex flex-column gap-4 align-items-center justify-content-center bg-secondary vh-100 text-white" style="background: url({{asset('assets/home-page/hero-3.jpg')}})  no-repeat center; background-size: cover;">
+                    <h4 class="fs-4">Anime Threads: Where Imagination Meets Fabrication</h4>
+                    <h1 class="fs-1 fw-bolder">TakuRui</h1>
+                    <a href="" class="btn btn-light py-2 py-sm-3 px-4 px-sm-5 text-center rounded-0">
+                        <span class="fs-5">SHOP NOW</span>
+                    </a>
                 </div>
             </div>
         </div>
