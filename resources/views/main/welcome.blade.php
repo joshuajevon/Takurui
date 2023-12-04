@@ -18,7 +18,7 @@
                 <div class="d-flex flex-column gap-4 align-items-center justify-content-center bg-secondary vh-100 text-white" style="background: url({{asset('assets/home-page/hero-1.jpg')}})  no-repeat center; background-size: cover;">
                     <h4 class="fs-4">From Screens to Threads: Anime Apparel Redefined</h4>
                     <h1 class="fs-1 fw-bolder">TakuRui</h1>
-                    <a href="" class="btn btn-light py-2 py-sm-3 px-4 px-sm-5 text-center rounded-0">
+                    <a href="/products" class="btn btn-light py-2 py-sm-3 px-4 px-sm-5 text-center rounded-0">
                         <span class="fs-5">SHOP NOW</span>
                     </a>
                 </div>
@@ -27,7 +27,7 @@
                 <div class="d-flex flex-column gap-4 align-items-center justify-content-center bg-secondary vh-100 text-white" style="background: url({{asset('assets/home-page/hero-2.jpg')}})  no-repeat center; background-size: cover;">
                     <h4 class="fs-4">Anime Couture: Wear Your Passion with Prides</h4>
                     <h1 class="fs-1 fw-bolder">TakuRui</h1>
-                    <a href="" class="btn btn-light py-2 py-sm-3 px-4 px-sm-5 text-center rounded-0">
+                    <a href="/products" class="btn btn-light py-2 py-sm-3 px-4 px-sm-5 text-center rounded-0">
                         <span class="fs-5">SHOP NOW</span>
                     </a>
                 </div>
@@ -36,7 +36,7 @@
                 <div class="d-flex flex-column gap-4 align-items-center justify-content-center bg-secondary vh-100 text-white" style="background: url({{asset('assets/home-page/hero-3.jpg')}})  no-repeat center; background-size: cover;">
                     <h4 class="fs-4">Anime Threads: Where Imagination Meets Fabrication</h4>
                     <h1 class="fs-1 fw-bolder">TakuRui</h1>
-                    <a href="" class="btn btn-light py-2 py-sm-3 px-4 px-sm-5 text-center rounded-0">
+                    <a href="/products" class="btn btn-light py-2 py-sm-3 px-4 px-sm-5 text-center rounded-0">
                         <span class="fs-5">SHOP NOW</span>
                     </a>
                 </div>
